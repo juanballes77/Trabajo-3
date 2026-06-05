@@ -3,5 +3,10 @@
         <file>fondo1.png</file>
         <file>personaje1.png</file>
         <file>road.png</file>
+        <file>meta.png</file>
+        <file>roca.png</file>
+        <file>cangrejo.png</file>
+        <file>tiburon.png</file>
+        <file>calamar.png</file>
     </qresource>
 </RCC>

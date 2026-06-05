@@ -148,6 +148,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qyieldcpu.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QKeyEvent \
+  C:/Qt/6.10.2/mingw_64/include/QtGui/QPainter \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QTransform \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qaction.h \
@@ -437,6 +438,9 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/calamar.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/cangrejo.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/enemigo.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/jugador.h \
@@ -445,4 +449,5 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Users/juand/OneDrive/Documentos/Desafio3/nivel2.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/nivelbase.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/obstaculo.h \
-  C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.h
+  C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/tiburon.h

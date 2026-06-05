@@ -40,11 +40,10 @@ MainWindow::MainWindow(QWidget *parent)
         stackedWidget->setCurrentIndex(IDX_JUEGO);
 
         QRectF rect = vistaJuego->rect();
-        escena->setSceneRect(0, 0, rect.width(), rect.height()); // ← escena cuadrada para nivel 2
+        escena->setSceneRect(0, 0, 10000, rect.height());
         vistaJuego->resetTransform();
-        vistaJuego->fitInView(escena->sceneRect(), Qt::IgnoreAspectRatio);
 
-        nivel2->iniciar(); // ← nivel2 en lugar de nivel1
+        nivel1->iniciar();
     });
 
     connect(nivel1, &Nivel1::nivelTerminado, this, &MainWindow::onNivel1Terminado);
@@ -57,11 +56,11 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-// ─── Slots ────────────────────────────────────────────────────
-
 void MainWindow::onNivel1Terminado()
 {
-    // Texto de transición entre niveles
+    // Terminar nivel 1 limpiando parallax antes de mostrar transición
+    nivel1->terminar();
+
     pantallaTransicion->establecerTexto(
         "¡ETAPA 1 COMPLETADA!",
         "Has terminado la etapa de natación.\n¡Prepárate para el ciclismo!"
@@ -71,13 +70,11 @@ void MainWindow::onNivel1Terminado()
 
 void MainWindow::onContinuarTransicion()
 {
-    // Si el nivel 2 ya terminó, volver al menú
     if (nivel2->obtenerNivelCompletado()) {
         stackedWidget->setCurrentIndex(IDX_MENU);
         return;
     }
 
-    // Si no, iniciar nivel 2
     QRectF rect = vistaJuego->rect();
     escena->setSceneRect(0, 0, rect.width(), rect.height());
     vistaJuego->resetTransform();
@@ -89,15 +86,12 @@ void MainWindow::onContinuarTransicion()
 
 void MainWindow::onNivel2Terminado()
 {
-    // Reutilizar pantalla de transición como pantalla final
     pantallaTransicion->establecerTexto(
         "¡TRIATLÓN COMPLETADO!",
         "¡Felicitaciones!\nHas completado las etapas de\nnatación y ciclismo."
         );
     stackedWidget->setCurrentIndex(IDX_TRANSICION);
 }
-
-// ─── Teclado ──────────────────────────────────────────────────
 
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {

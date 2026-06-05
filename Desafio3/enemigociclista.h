@@ -1,26 +1,27 @@
 #ifndef ENEMIGOCICLISTA_H
 #define ENEMIGOCICLISTA_H
 
-#include <QGraphicsRectItem>
-#include <QObject>
+#include "enemigo.h"
 
-class EnemigoCiclista : public QObject, public QGraphicsRectItem
+class EnemigoCiclista : public Enemigo
 {
     Q_OBJECT
 
 public:
-    explicit EnemigoCiclista(float x, float y, float ancho, float alto, QObject *parent = nullptr);
+    explicit EnemigoCiclista(float x, float y, float ancho, float alto,
+                             QObject *parent = nullptr);
 
+    void actualizar() override;
     void actualizar(float velocidadScroll, float limiteIzq, float limiteDer);
 
-    float obtenerX() const;
-    float obtenerY() const;
+protected:
+    void cargarFrame(int indice) override;
 
 private:
-    float x;
-    float y;
+    float ancho;
+    float alto;
+    float velocidadExtra;
     float velocidadLateral;
-    float velocidadExtra;   // Velocidad adicional al scroll
 };
 
 #endif // ENEMIGOCICLISTA_H

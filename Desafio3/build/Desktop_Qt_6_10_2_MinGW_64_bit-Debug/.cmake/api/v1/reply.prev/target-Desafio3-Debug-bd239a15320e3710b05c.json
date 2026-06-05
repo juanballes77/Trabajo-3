@@ -75,13 +75,13 @@
 			{
 				"command" : 4,
 				"file" : 1,
-				"line" : 56,
+				"line" : 60,
 				"parent" : 0
 			},
 			{
 				"command" : 5,
 				"file" : 1,
-				"line" : 44,
+				"line" : 48,
 				"parent" : 0
 			},
 			{
@@ -390,7 +390,10 @@
 				23,
 				25,
 				27,
-				30
+				29,
+				31,
+				33,
+				36
 			]
 		}
 	],
@@ -525,7 +528,10 @@
 				23,
 				25,
 				27,
-				30
+				29,
+				31,
+				33,
+				36
 			]
 		},
 		{
@@ -544,7 +550,10 @@
 				22,
 				24,
 				26,
-				28
+				28,
+				30,
+				32,
+				34
 			]
 		},
 		{
@@ -565,15 +574,15 @@
 			"name" : "",
 			"sourceIndexes" : 
 			[
-				29
+				35
 			]
 		},
 		{
 			"name" : "CMake Rules",
 			"sourceIndexes" : 
 			[
-				31,
-				32
+				37,
+				38
 			]
 		}
 	],
@@ -725,13 +734,46 @@
 		},
 		{
 			"backtrace" : 4,
-			"path" : "pantallafinal.h",
+			"path" : "enemigo.h",
 			"sourceGroupIndex" : 1
 		},
 		{
 			"backtrace" : 4,
 			"compileGroupIndex" : 0,
-			"path" : "pantallafinal.cpp",
+			"path" : "enemigo.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "tiburon.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "tiburon.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "cangrejo.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "cangrejo.cpp",
+			"sourceGroupIndex" : 0
+		},
+		{
+			"backtrace" : 4,
+			"path" : "calamar.h",
+			"sourceGroupIndex" : 1
+		},
+		{
+			"backtrace" : 4,
+			"compileGroupIndex" : 0,
+			"path" : "calamar.cpp",
 			"sourceGroupIndex" : 0
 		},
 		{

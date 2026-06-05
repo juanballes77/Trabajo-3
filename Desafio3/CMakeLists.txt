@@ -28,6 +28,10 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         meta.h meta.cpp
         pantallatransicion.h pantallatransicion.cpp
         enemigociclista.h enemigociclista.cpp
+        enemigo.h enemigo.cpp
+        tiburon.h tiburon.cpp
+        cangrejo.h cangrejo.cpp
+        calamar.h calamar.cpp
 
     )
 else()

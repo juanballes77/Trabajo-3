@@ -4,9 +4,13 @@
 #include <QTimer>
 #include <QKeyEvent>
 #include <QVector>
+#include <QTransform>
 #include "nivelbase.h"
 #include "obstaculo.h"
 #include "meta.h"
+#include "tiburon.h"
+#include "cangrejo.h"
+#include "calamar.h"
 
 class Nivel1 : public NivelBase
 {
@@ -35,12 +39,20 @@ private:
     bool teclaDerecha;
     bool teclaImpulso;
 
+    // Velocidad del jugador
+    float velocidadJugador;
+    static constexpr float VELOCIDAD_NORMAL   = 4.0f;
+    static constexpr float VELOCIDAD_REDUCIDA = 1.6f;
+
     // Elementos del nivel
     QVector<Obstaculo*> obstaculos;
+    QVector<Tiburon*>   tiburones;
+    QVector<Cangrejo*>  cangrejos;
+    Calamar            *calamar;
     Meta               *metaNivel;
+    float               altoEscena;
 
-    // Longitud del nivel
-    static const int LONGITUD_NIVEL  = 5000;
+    static const int LONGITUD_NIVEL     = 10000;
     static const int INTERVALO_JUEGO_MS = 16;
 
     void cargarJugador();
@@ -49,8 +61,10 @@ private:
     void cargarEnemigos();
 
     void procesarMovimiento();
+    void actualizarEnemigos();
     void verificarColisiones();
     void verificarMeta();
+
 };
 
 #endif // NIVEL1_H

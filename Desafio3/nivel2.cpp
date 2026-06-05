@@ -17,11 +17,11 @@ Nivel2::Nivel2(QGraphicsScene *escena, QObject *parent)
     carreteraDerecha(0.0f),
     velocidadScroll(6.0f),
     velocidadActual(6.0f),
-    velocidadMaxima(20.0f),
-    aceleracion(0.1f),
+    velocidadMaxima(18.0f),
+    aceleracion(0.7f),
     desaceleracion(0.1f),
     repeticionesFondo(0),
-    repeticionesParaMeta(2), // Meta aparece después de 10 repeticiones
+    repeticionesParaMeta(10),
     metaVisible(false),
     metaNivel2(nullptr)
 {
@@ -35,9 +35,6 @@ Nivel2::Nivel2(QGraphicsScene *escena, QObject *parent)
 
     temporizadorEnemigos = new QTimer(this);
     connect(temporizadorEnemigos, &QTimer::timeout, this, &Nivel2::generarEnemigo);
-
-    // Constructor
-
 }
 
 Nivel2::~Nivel2()
@@ -45,21 +42,27 @@ Nivel2::~Nivel2()
     terminar();
 }
 
-// ─── Métodos virtuales ────────────────────────────────────────
-
 void Nivel2::iniciar()
 {
+    // Resetear punteros ANTES de limpiar la escena
+    copiasParallax.clear();
+    fondoCarretera1 = nullptr;
+    fondoCarretera2 = nullptr;
+    fondoCarretera3 = nullptr;
+    fondoCarretera4 = nullptr;
+    jugador         = nullptr;
+
     escena->clear();
     obstaculos.clear();
     enemigos.clear();
 
+    repeticionesFondo = 0;
+    metaVisible       = false;
+    metaNivel2        = nullptr;
+
     cargarFondoCarretera(":/road.png");
     cargarCarretera();
     cargarJugador();
-
-    repeticionesFondo = 0;
-    metaVisible = false;
-    metaNivel2 = nullptr;
 
     temporizadorJuego->start(INTERVALO_JUEGO_MS);
     temporizadorObstaculos->start(INTERVALO_OBSTACULOS_MS);
@@ -96,14 +99,11 @@ void Nivel2::terminar()
         temporizadorEnemigos->stop();
 }
 
-// ─── Loop principal ───────────────────────────────────────────
-
 void Nivel2::actualizar()
 {
     if (!jugador)
         return;
 
-    // MUA: acelerar o desacelerar según tecla espacio
     if (teclaAcelerar) {
         if (velocidadActual < velocidadMaxima)
             velocidadActual += aceleracion;
@@ -112,11 +112,10 @@ void Nivel2::actualizar()
             velocidadActual -= desaceleracion;
     }
 
-    // Detectar repetición del fondo
     static float yAnterior = 0;
     if (fondoCarretera1) {
         float yActual = fondoCarretera1->y();
-        if (yActual < yAnterior && !metaVisible) { // Detecta cuando se reinicia (salta hacia arriba)
+        if (yActual < yAnterior && !metaVisible) {
             repeticionesFondo++;
             if (repeticionesFondo >= repeticionesParaMeta)
                 mostrarMeta();
@@ -124,11 +123,8 @@ void Nivel2::actualizar()
         yAnterior = yActual;
     }
 
-    // Mover meta con el fondo
-    if (metaVisible && metaNivel2) {
+    if (metaVisible && metaNivel2)
         metaNivel2->moveBy(0, velocidadActual);
-    }
-
 
     procesarMovimiento();
     desplazarFondoCarretera(velocidadActual);
@@ -142,8 +138,6 @@ void Nivel2::actualizar()
     verificarEstado();
     actualizarHUD();
 }
-
-// ─── Teclado ──────────────────────────────────────────────────
 
 void Nivel2::teclaPresionada(QKeyEvent *evento)
 {
@@ -165,8 +159,6 @@ void Nivel2::teclaLiberada(QKeyEvent *evento)
     }
 }
 
-// ─── Movimiento ───────────────────────────────────────────────
-
 void Nivel2::procesarMovimiento()
 {
     if (teclaIzquierda) jugador->moverIzquierda();
@@ -184,8 +176,6 @@ void Nivel2::liminarJugadorEnCarretera()
         jugador->establecerPosicion(carreteraDerecha - anchoJugador, jugador->obtenerY());
 }
 
-// ─── Generación esporádica ────────────────────────────────────
-
 void Nivel2::generarObstaculo()
 {
     int cantidad = 1 + (std::rand() % 6);
@@ -194,8 +184,7 @@ void Nivel2::generarObstaculo()
         float rangoX = carreteraDerecha - carreteraIzquierda - 60;
         float x      = carreteraIzquierda + (std::rand() % (int)rangoX);
 
-        // Espaciado mínimo de 150px entre obstáculos
-        Obstaculo *obs = new Obstaculo(x, -50 - (i * 150), 60, 30);
+        Obstaculo *obs = new Obstaculo(x, -50 - (i * 150), 60, 30, true);
         escena->addItem(obs);
         obstaculos.append(obs);
     }
@@ -216,20 +205,19 @@ void Nivel2::generarEnemigo()
         enemigos.append(enemigo);
     }
 
-    // Intervalo aleatorio entre 1.5 y 4 segundos
     temporizadorEnemigos->start(1500 + (std::rand() % 2500));
 }
-// ─── Actualización de elementos ───────────────────────────────
 
 void Nivel2::actualizarObstaculos()
 {
     for (Obstaculo *obs : obstaculos)
-        obs->moveBy(0, velocidadActual); // ← atributo de la clase
+        obs->moveBy(0, velocidadActual);
 }
+
 void Nivel2::actualizarEnemigos()
 {
     for (EnemigoCiclista *enemigo : enemigos)
-        enemigo->actualizar(velocidadActual, carreteraIzquierda, carreteraDerecha); // ← atributo de la clase
+        enemigo->actualizar(velocidadActual, carreteraIzquierda, carreteraDerecha);
 }
 
 void Nivel2::limpiarElementosFueraDePantalla()
@@ -246,7 +234,7 @@ void Nivel2::limpiarElementosFueraDePantalla()
     }
 
     for (int i = enemigos.size() - 1; i >= 0; i--) {
-        float yEnemigo = enemigos[i]->mapToScene(enemigos[i]->rect().bottomLeft()).y();
+        float yEnemigo = enemigos[i]->obtenerY();
         if (yEnemigo > altoEscena) {
             escena->removeItem(enemigos[i]);
             delete enemigos[i];
@@ -254,8 +242,6 @@ void Nivel2::limpiarElementosFueraDePantalla()
         }
     }
 }
-
-// ─── Carga de elementos ───────────────────────────────────────
 
 void Nivel2::cargarCarretera()
 {
@@ -282,8 +268,6 @@ void Nivel2::cargarEnemigos()
     // Los enemigos se generan esporádicamente con temporizadorEnemigos
 }
 
-// ─── Detección de colisiones ──────────────────────────────────
-
 void Nivel2::verificarColisiones()
 {
     QList<QGraphicsItem*> colisiones = jugador->collidingItems();
@@ -295,23 +279,27 @@ void Nivel2::verificarColisiones()
         }
     }
 
-    // Recuperar velocidad normal gradualmente
     if (!teclaAcelerar && velocidadActual < velocidadScroll)
         velocidadActual += aceleracion;
 }
-
 
 void Nivel2::mostrarMeta()
 {
     metaVisible = true;
 
-    metaNivel2 = new QGraphicsRectItem(carreteraIzquierda, 0,
-                                       carreteraDerecha - carreteraIzquierda, 20);
-    metaNivel2->setBrush(QBrush(QColor(255, 215, 0)));
-    metaNivel2->setPen(QPen(QColor(255, 255, 255), 3));
+    QPixmap hoja(":/meta.png");
+    QPixmap imagenMeta = hoja.copy(4, 285, 197, 19);
+
+    float anchoMeta = carreteraDerecha - carreteraIzquierda;
+    imagenMeta = imagenMeta.scaled(anchoMeta, 40, Qt::IgnoreAspectRatio);
+
+    metaNivel2 = new QGraphicsRectItem(carreteraIzquierda, 0, anchoMeta, 40);
+    metaNivel2->setBrush(QBrush(imagenMeta));
+    metaNivel2->setPen(Qt::NoPen);
     metaNivel2->setZValue(2);
     escena->addItem(metaNivel2);
 }
+
 void Nivel2::verificarMeta()
 {
     if (!metaVisible || !metaNivel2 || !jugador)

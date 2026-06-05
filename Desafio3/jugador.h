@@ -32,7 +32,9 @@ public:
     // Setters
     void establecerPosicion(float x, float y);
     void establecerEstaVivo(bool estado);
+    void establecerLimites(float yMinimo, float yMaximo);
     void establecerGravedad(bool activa);
+    void establecerVelocidad(float v);
 
 private slots:
     void siguienteFrame();
@@ -46,6 +48,8 @@ private:
     float fuerzaImpulso;
     float gravedad;
     float velocidadMaxCaida;
+    float limiteYMinimo;
+    float limiteYMaximo;
     bool  estaVivo;
     bool  gravedadActiva;
 

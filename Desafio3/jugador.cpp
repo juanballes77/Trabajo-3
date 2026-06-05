@@ -15,21 +15,15 @@ Jugador::Jugador(QObject *parent)
     gravedadActiva(true),
     frameActual(0),
     moviendose(false),
-    mirandoDerecha(true)
+    mirandoDerecha(true),
+    limiteYMinimo(0.0f),
+    limiteYMaximo(0.0f)
 {
     // Coordenadas individuales de cada frame
     frames.append(QRect(6,   4,  167, 71)); // Frame 0
     frames.append(QRect(178, 9,  161, 63)); // Frame 1
     frames.append(QRect(30,  88, 143, 71)); // Frame 2
     frames.append(QRect(179, 81, 122, 78)); // Frame 3
-
-    // Rectángulo temporal nivel 2 (verde)
-    QPixmap temporal(50, 80);
-    temporal.fill(Qt::green);
-    setPixmap(temporal);
-
-    // Coordenadas individuales de cada frame
-    frames.append(QRect(6,   4,  167, 71));
 
     hoja = QPixmap(":/personaje1.png");
 
@@ -62,6 +56,11 @@ void Jugador::impulsarse()
         velocidadY = fuerzaImpulso;
 }
 
+void Jugador::establecerVelocidad(float v)
+{
+    velocidad = v;
+}
+
 // ─── Física ───────────────────────────────────────────────────
 
 void Jugador::aplicarGravedad()
@@ -80,9 +79,26 @@ void Jugador::actualizar()
 
     x += velocidadX;
 
-    // Solo actualizar Y si la gravedad está activa
+    // Límite izquierdo: no puede salir por la izquierda
+    if (x < 0) {
+        x = 0;
+        velocidadX = 0.0f;
+    }
+
     if (gravedadActiva)
         y += velocidadY;
+
+    // Aplicar límites verticales
+    if (limiteYMaximo > 0) {
+        if (y < limiteYMinimo) {
+            y = limiteYMinimo;
+            velocidadY = 0.0f;
+        }
+        if (y + pixmap().height() > limiteYMaximo) {
+            y = limiteYMaximo - pixmap().height();
+            velocidadY = 0.0f;
+        }
+    }
 
     setPos(x, y);
 
@@ -142,5 +158,11 @@ void Jugador::establecerGravedad(bool activa)
 {
     gravedadActiva = activa;
     if (!activa)
-        velocidadY = 0.0f; // Resetear velocidad vertical
+        velocidadY = 0.0f;
+}
+
+void Jugador::establecerLimites(float yMinimo, float yMaximo)
+{
+    limiteYMinimo = yMinimo;
+    limiteYMaximo = yMaximo;
 }

@@ -148,6 +148,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qyieldcpu.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QKeyEvent \
+  C:/Qt/6.10.2/mingw_64/include/QtGui/QPainter \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QTransform \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qbrush.h \
@@ -155,6 +156,9 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtGui/qevent.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qeventpoint.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qfont.h \
+  C:/Qt/6.10.2/mingw_64/include/QtGui/qfontinfo.h \
+  C:/Qt/6.10.2/mingw_64/include/QtGui/qfontmetrics.h \
+  C:/Qt/6.10.2/mingw_64/include/QtGui/qfontvariableaxis.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qguiapplication.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qguiapplication_platform.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qimage.h \
@@ -162,6 +166,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtGui/qinputmethod.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qkeysequence.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qpaintdevice.h \
+  C:/Qt/6.10.2/mingw_64/include/QtGui/qpainter.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qpainterpath.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qpen.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qpixelformat.h \
@@ -173,6 +178,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtGui/qrgba64.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qscreen.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qscreen_platform.h \
+  C:/Qt/6.10.2/mingw_64/include/QtGui/qtextoption.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qtgui-config.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qtguiexports.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qtguiglobal.h \
@@ -402,6 +408,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/enemigo.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/jugador.h \

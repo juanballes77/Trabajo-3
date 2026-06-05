@@ -7,6 +7,8 @@ NivelBase::NivelBase(QGraphicsScene *escena, QObject *parent)
     escena(escena),
     jugador(nullptr),
     fondo(nullptr),
+    temporizadorParallax(nullptr),
+    frameParallaxActual(0),
     fondoCarretera1(nullptr),
     fondoCarretera2(nullptr),
     fondoCarretera3(nullptr),
@@ -23,7 +25,7 @@ NivelBase::~NivelBase()
     delete fondo;
 }
 
-// ─── Fondo animado (nivel 1) ──────────────────────────────────
+// ─── Fondo animado (original) ─────────────────────────────────
 
 void NivelBase::cargarFondo(const QString &rutaImagen)
 {
@@ -40,22 +42,86 @@ void NivelBase::cargarFondo(const QString &rutaImagen)
     fondo->iniciar();
 }
 
-// ─── Fondo carretera (nivel 2) ────────────────────────────────
+// ─── Fondo parallax horizontal (nivel 1) ─────────────────────
+
+void NivelBase::cargarFondoParallax(const QString &rutaImagen)
+{
+    // Eliminar timer anterior si existe
+    if (temporizadorParallax) {
+        temporizadorParallax->stop();
+        temporizadorParallax->disconnect();
+        delete temporizadorParallax;
+        temporizadorParallax = nullptr;
+    }
+
+    hojaParallax        = QPixmap(rutaImagen);
+    frameParallaxActual = 0;
+    copiasParallax.clear();
+
+    QPixmap imagen = hojaParallax.copy(7, 18, 511, 431);
+    QRectF  rect   = escena->sceneRect();
+    float   escala = rect.height() / imagen.height();
+    int nuevoAncho = imagen.width() * escala;
+    imagen = imagen.scaled(nuevoAncho, rect.height(), Qt::IgnoreAspectRatio);
+
+    for (int i = 0; i < 16; i++) {
+        QGraphicsPixmapItem *copia = new QGraphicsPixmapItem(imagen);
+        copia->setPos(nuevoAncho * i, 0);
+        copia->setZValue(-1);
+        escena->addItem(copia);
+        copiasParallax.append(copia);
+    }
+
+    temporizadorParallax = new QTimer(this);
+    connect(temporizadorParallax, &QTimer::timeout, this, &NivelBase::actualizarFrameParallax);
+    temporizadorParallax->start(200);
+}
+
+void NivelBase::desplazarFondoParallax(float xJugador)
+{
+    if (copiasParallax.isEmpty()) return;
+
+    float anchoImagen = copiasParallax.first()->pixmap().width();
+    float xFondo      = -(xJugador * 0.3f);
+
+    for (int i = 0; i < copiasParallax.size(); i++)
+        copiasParallax[i]->setX(xFondo + anchoImagen * i);
+}
+
+void NivelBase::actualizarFrameParallax()
+{
+    if (copiasParallax.isEmpty()) return;
+
+    frameParallaxActual = (frameParallaxActual + 1) % 4;
+
+    QPixmap imagen = hojaParallax.copy(7 + (frameParallaxActual * 513), 18, 511, 431);
+    if (imagen.isNull()) return;
+
+    QRectF rect    = escena->sceneRect();
+    float  escala  = rect.height() / imagen.height();
+    int nuevoAncho = imagen.width() * escala;
+    imagen = imagen.scaled(nuevoAncho, rect.height(), Qt::IgnoreAspectRatio);
+
+    for (QGraphicsPixmapItem *copia : copiasParallax) {
+        if (copia && copia->scene())
+            copia->setPixmap(imagen);
+    }
+}
+
+// ─── Fondo carretera vertical (nivel 2) ──────────────────────
 
 void NivelBase::cargarFondoCarretera(const QString &rutaImagen)
 {
     QPixmap mitadIzq(rutaImagen);
     QPixmap mitadDer = mitadIzq.transformed(QTransform().scale(-1, 1));
 
-    QRectF rect       = escena->sceneRect();
-    float anchoMitad  = rect.width() / 2.0f;
-    float altoVista   = rect.height();
+    QRectF rect      = escena->sceneRect();
+    float anchoMitad = rect.width() / 2.0f;
+    float altoVista  = rect.height();
 
-    // Escalar para que ocupe exactamente la mitad del ancho y todo el alto
     mitadIzq = mitadIzq.scaled(anchoMitad, altoVista, Qt::IgnoreAspectRatio);
     mitadDer = mitadDer.scaled(anchoMitad, altoVista, Qt::IgnoreAspectRatio);
 
-    // Copia A — empieza en Y=0 (visible)
     fondoCarretera1 = new QGraphicsPixmapItem(mitadIzq);
     fondoCarretera2 = new QGraphicsPixmapItem(mitadDer);
     fondoCarretera1->setPos(0,          0);
@@ -65,7 +131,6 @@ void NivelBase::cargarFondoCarretera(const QString &rutaImagen)
     escena->addItem(fondoCarretera1);
     escena->addItem(fondoCarretera2);
 
-    // Copia B — empieza en Y=-altoVista (arriba, lista para entrar)
     fondoCarretera3 = new QGraphicsPixmapItem(mitadIzq);
     fondoCarretera4 = new QGraphicsPixmapItem(mitadDer);
     fondoCarretera3->setPos(0,          -altoVista);
@@ -83,19 +148,16 @@ void NivelBase::desplazarFondoCarretera(float velocidad)
 
     float altoVista = escena->sceneRect().height();
 
-    // Mover las 4 piezas hacia abajo
     fondoCarretera1->setY(fondoCarretera1->y() + velocidad);
     fondoCarretera2->setY(fondoCarretera2->y() + velocidad);
     fondoCarretera3->setY(fondoCarretera3->y() + velocidad);
     fondoCarretera4->setY(fondoCarretera4->y() + velocidad);
 
-    // Cuando la copia A sale por abajo, sube al tope
     if (fondoCarretera1->y() >= altoVista) {
         fondoCarretera1->setY(fondoCarretera3->y() - altoVista);
         fondoCarretera2->setY(fondoCarretera4->y() - altoVista);
     }
 
-    // Cuando la copia B sale por abajo, sube al tope
     if (fondoCarretera3->y() >= altoVista) {
         fondoCarretera3->setY(fondoCarretera1->y() - altoVista);
         fondoCarretera4->setY(fondoCarretera2->y() - altoVista);

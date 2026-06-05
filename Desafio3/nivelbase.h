@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QGraphicsScene>
 #include <QGraphicsPixmapItem>
+#include <QTimer>
+#include <QVector>
 #include "jugador.h"
 #include "fondo.h"
 
@@ -30,11 +32,21 @@ public:
 protected:
     QGraphicsScene      *escena;
     Jugador             *jugador;
-    Fondo               *fondo;           // Fondo animado (nivel 1)
-    QGraphicsPixmapItem *fondoCarretera1; // Mitad izquierda
-    QGraphicsPixmapItem *fondoCarretera2; // Mitad derecha (reflejada)
-    QGraphicsPixmapItem *fondoCarretera3; // Copia B izquierda
-    QGraphicsPixmapItem *fondoCarretera4; // Copia B derecha
+
+    // Fondo animado (original)
+    Fondo               *fondo;
+
+    // Fondo parallax (nivel 1)
+    QVector<QGraphicsPixmapItem*> copiasParallax;
+    QTimer              *temporizadorParallax;
+    int                  frameParallaxActual;
+    QPixmap              hojaParallax;
+
+    // Fondo carretera (nivel 2)
+    QGraphicsPixmapItem *fondoCarretera1;
+    QGraphicsPixmapItem *fondoCarretera2;
+    QGraphicsPixmapItem *fondoCarretera3;
+    QGraphicsPixmapItem *fondoCarretera4;
 
     int  puntaje;
     int  vidasRestantes;
@@ -45,8 +57,13 @@ protected:
     void perderVida();
 
     void cargarFondo(const QString &rutaImagen);
+    void cargarFondoParallax(const QString &rutaImagen);
+    void desplazarFondoParallax(float xJugador);
     void cargarFondoCarretera(const QString &rutaImagen);
     void desplazarFondoCarretera(float velocidad);
+
+private slots:
+    void actualizarFrameParallax();
 
 signals:
     void nivelTerminado();

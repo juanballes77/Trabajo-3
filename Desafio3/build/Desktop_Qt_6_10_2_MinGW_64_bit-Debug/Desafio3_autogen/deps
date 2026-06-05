@@ -147,6 +147,7 @@ Desafio3_autogen/timestamp: \
 	C:/Qt/6.10.2/mingw_64/include/QtCore/qxptype_traits.h \
 	C:/Qt/6.10.2/mingw_64/include/QtCore/qyieldcpu.h \
 	C:/Qt/6.10.2/mingw_64/include/QtGui/QKeyEvent \
+	C:/Qt/6.10.2/mingw_64/include/QtGui/QPainter \
 	C:/Qt/6.10.2/mingw_64/include/QtGui/QPixmap \
 	C:/Qt/6.10.2/mingw_64/include/QtGui/QTransform \
 	C:/Qt/6.10.2/mingw_64/include/QtGui/qaction.h \
@@ -625,6 +626,12 @@ Desafio3_autogen/timestamp: \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/moc_predefs.h \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/calamar.cpp \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/calamar.h \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/cangrejo.cpp \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/cangrejo.h \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/enemigo.cpp \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/enemigo.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.cpp \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.cpp \
@@ -649,5 +656,7 @@ Desafio3_autogen/timestamp: \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.cpp \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/recursos.qrc \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/tiburon.cpp \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/tiburon.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/mainwindow.ui \
 	C:/Qt/Tools/CMake_64/bin/cmake.exe

@@ -41,7 +41,8 @@ template <> constexpr inline auto NivelBase::qt_create_metaobjectdata<qt_meta_ta
         "NivelBase",
         "nivelTerminado",
         "",
-        "juegoTerminado"
+        "juegoTerminado",
+        "actualizarFrameParallax"
     };
 
     QtMocHelpers::UintData qt_methods {
@@ -49,6 +50,8 @@ template <> constexpr inline auto NivelBase::qt_create_metaobjectdata<qt_meta_ta
         QtMocHelpers::SignalData<void()>(1, 2, QMC::AccessPublic, QMetaType::Void),
         // Signal 'juegoTerminado'
         QtMocHelpers::SignalData<void()>(3, 2, QMC::AccessPublic, QMetaType::Void),
+        // Slot 'actualizarFrameParallax'
+        QtMocHelpers::SlotData<void()>(4, 2, QMC::AccessPrivate, QMetaType::Void),
     };
     QtMocHelpers::UintData qt_properties {
     };
@@ -74,6 +77,7 @@ void NivelBase::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, v
         switch (_id) {
         case 0: _t->nivelTerminado(); break;
         case 1: _t->juegoTerminado(); break;
+        case 2: _t->actualizarFrameParallax(); break;
         default: ;
         }
     }
@@ -104,14 +108,14 @@ int NivelBase::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 2)
+        if (_id < 3)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 2;
+        _id -= 3;
     }
     if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 2)
+        if (_id < 3)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 2;
+        _id -= 3;
     }
     return _id;
 }

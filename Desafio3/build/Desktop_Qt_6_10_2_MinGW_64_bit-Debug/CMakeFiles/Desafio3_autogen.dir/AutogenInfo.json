@@ -325,6 +325,24 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/calamar.h",
+			"MU",
+			"EWIEGA46WW/moc_calamar.cpp",
+			null
+		],
+		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/cangrejo.h",
+			"MU",
+			"EWIEGA46WW/moc_cangrejo.cpp",
+			null
+		],
+		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/enemigo.h",
+			"MU",
+			"EWIEGA46WW/moc_enemigo.cpp",
+			null
+		],
+		[
 			"C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.h",
 			"MU",
 			"EWIEGA46WW/moc_enemigociclista.cpp",
@@ -388,6 +406,12 @@
 			"C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.h",
 			"MU",
 			"EWIEGA46WW/moc_pantallatransicion.cpp",
+			null
+		],
+		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/tiburon.h",
+			"MU",
+			"EWIEGA46WW/moc_tiburon.cpp",
 			null
 		]
 	],
@@ -462,6 +486,13 @@
 	"SETTINGS_FILE" : "C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/Desafio3_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/calamar.cpp", "MU", null ],
+		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/cangrejo.cpp",
+			"MU",
+			null
+		],
+		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/enemigo.cpp", "MU", null ],
 		[
 			"C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.cpp",
 			"MU",
@@ -493,7 +524,8 @@
 			"C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.cpp",
 			"MU",
 			null
-		]
+		],
+		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/tiburon.cpp", "MU", null ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

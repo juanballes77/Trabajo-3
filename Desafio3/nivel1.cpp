@@ -1,6 +1,7 @@
 #include "nivel1.h"
 #include <algorithm>
 #include <QGraphicsView>
+#include <QTransform>
 
 Nivel1::Nivel1(QGraphicsScene *escena, QObject *parent)
     : NivelBase(escena, parent),
@@ -8,7 +9,10 @@ Nivel1::Nivel1(QGraphicsScene *escena, QObject *parent)
     teclaIzquierda(false),
     teclaDerecha(false),
     teclaImpulso(false),
-    metaNivel(nullptr)
+    velocidadJugador(VELOCIDAD_NORMAL),
+    metaNivel(nullptr),
+    calamar(nullptr),
+    altoEscena(0)
 {
     temporizadorJuego = new QTimer(this);
     connect(temporizadorJuego, &QTimer::timeout, this, &Nivel1::actualizar);
@@ -19,19 +23,27 @@ Nivel1::~Nivel1()
     terminar();
 }
 
-// ─── Métodos virtuales ────────────────────────────────────────
-
 void Nivel1::iniciar()
 {
-    escena->clear();
-    obstaculos.clear();
-    metaNivel = nullptr;
+    if (temporizadorParallax && temporizadorParallax->isActive())
+        temporizadorParallax->stop();
 
-    cargarFondo(":/fondo1.png");
+    copiasParallax.clear();
+    escena->clear();
+
+    obstaculos.clear();
+    tiburones.clear();
+    cangrejos.clear();
+    metaNivel        = nullptr;
+    calamar          = nullptr;
+    altoEscena       = escena->sceneRect().height();
+    velocidadJugador = VELOCIDAD_NORMAL;
+
+    cargarFondoParallax(":/fondo1.png");
     cargarJugador();
     cargarObstaculos();
-    cargarMeta();
     cargarEnemigos();
+    cargarMeta();
 
     temporizadorJuego->start(INTERVALO_JUEGO_MS);
 }
@@ -40,7 +52,6 @@ void Nivel1::pausar()
 {
     if (!estaPausado) {
         temporizadorJuego->stop();
-        fondo->detener();
         estaPausado = true;
     }
 }
@@ -49,7 +60,6 @@ void Nivel1::reanudar()
 {
     if (estaPausado) {
         temporizadorJuego->start(INTERVALO_JUEGO_MS);
-        fondo->iniciar();
         estaPausado = false;
     }
 }
@@ -58,11 +68,14 @@ void Nivel1::terminar()
 {
     if (temporizadorJuego && temporizadorJuego->isActive())
         temporizadorJuego->stop();
-    if (fondo)
-        fondo->detener();
-}
 
-// ─── Loop principal ───────────────────────────────────────────
+    if (temporizadorParallax) {
+        temporizadorParallax->stop();
+        temporizadorParallax->disconnect();
+    }
+
+    copiasParallax.clear();
+}
 
 void Nivel1::actualizar()
 {
@@ -71,18 +84,23 @@ void Nivel1::actualizar()
 
     procesarMovimiento();
     jugador->actualizar();
+    actualizarEnemigos();
 
-    // Cámara sigue al jugador
-    if (!escena->views().isEmpty())
-        escena->views().first()->centerOn(jugador);
+    if (!escena->views().isEmpty()) {
+        QGraphicsView *vista = escena->views().first();
+        QPointF centroActual  = vista->mapToScene(vista->viewport()->rect().center());
+        QPointF centroJugador = QPointF(jugador->obtenerX(), jugador->obtenerY());
+        QPointF nuevoCentro   = centroActual + (centroJugador - centroActual) * 0.15;
+        vista->centerOn(nuevoCentro);
+    }
+
+    desplazarFondoParallax(jugador->obtenerX());
 
     verificarColisiones();
     verificarMeta();
     verificarEstado();
     actualizarHUD();
 }
-
-// ─── Teclado ──────────────────────────────────────────────────
 
 void Nivel1::teclaPresionada(QKeyEvent *evento)
 {
@@ -104,61 +122,132 @@ void Nivel1::teclaLiberada(QKeyEvent *evento)
     }
 }
 
-// ─── Movimiento ───────────────────────────────────────────────
-
 void Nivel1::procesarMovimiento()
 {
+    jugador->establecerVelocidad(velocidadJugador);
     if (teclaIzquierda) jugador->moverIzquierda();
     if (teclaDerecha)   jugador->moverDerecha();
     if (teclaImpulso)   jugador->impulsarse();
 }
 
-// ─── Carga de elementos ───────────────────────────────────────
+void Nivel1::actualizarEnemigos()
+{
+    for (Tiburon *t : tiburones)
+        t->actualizar();
+    for (Cangrejo *c : cangrejos)
+        c->actualizar();
+
+    if (calamar) {
+        if (jugador->obtenerX() >= 7700)
+            calamar->establecerObjetivo(jugador->obtenerX(), jugador->obtenerY());
+        calamar->actualizar();
+    }
+}
 
 void Nivel1::cargarJugador()
 {
     jugador = new Jugador();
     escena->addItem(jugador);
     jugador->establecerPosicion(100, 300);
+    jugador->establecerLimites(0, altoEscena);
     jugador->setZValue(1);
 }
 
 void Nivel1::cargarObstaculos()
 {
-    QVector<QRectF> definiciones = {
-                                    {200,  400, 150, 30},
-                                    {450,  300, 30,  120},
-                                    {700,  450, 200, 30},
-                                    {950,  250, 30,  150},
-                                    {1150, 380, 180, 30},
-                                    };
+    QVector<QRectF> terreno = {
+                               {300,   0,              100, 500            },
+                               {1000,  altoEscena-400, 80,  400            },
+                               {1800,  0,              80,  80             },
+                               {1800,  150,            80,  altoEscena-150 },
+                               {2400,  500,            100, altoEscena-500 },
+                               {3200,  0,              80,  350            },
+                               {3900,  altoEscena-300, 100, 300            },
+                               {4500,  0,              80,  200            },
+                               {4500,  400,            80,  altoEscena-400 },
+                               {5500,  altoEscena-350, 100, 350            },
+                               {6200,  0,              80,  300            },
+                               {7000,  200,            80,  altoEscena-200 },
+                               {7500,  200,            80,  altoEscena-200 },
+                               };
 
-    for (const QRectF &def : definiciones) {
+    for (const QRectF &def : terreno) {
         Obstaculo *obs = new Obstaculo(def.x(), def.y(), def.width(), def.height());
         escena->addItem(obs);
         obstaculos.append(obs);
     }
-}
 
-void Nivel1::cargarMeta()
-{
-    // Meta al final del nivel, ocupa todo el alto de la escena
-    float altoEscena = escena->sceneRect().height();
-    metaNivel = new Meta(LONGITUD_NIVEL - 150, 0, 100, altoEscena);
-    escena->addItem(metaNivel);
-    metaNivel->setZValue(0);
+    QGraphicsRectItem *suelo = new QGraphicsRectItem(0, altoEscena - 20,
+                                                     escena->sceneRect().width(), 20);
+    suelo->setBrush(QBrush(QColor(80, 50, 20)));
+    suelo->setPen(Qt::NoPen);
+    suelo->setZValue(0);
+    escena->addItem(suelo);
 }
 
 void Nivel1::cargarEnemigos()
 {
-    // Se implementará cuando creemos la clase Enemigo
+    QVector<QVector<float>> posTiburones = {
+                                            {500,  200, 400,  800 },
+                                            {1200, 30,  1000, 1600},
+                                            {2200, 200, 2200, 2800},
+                                            {3500, 250, 3300, 4300},
+                                            {4700, 200, 4600, 5200},
+                                            {5800, 300, 5700, 6700},
+                                            {6600, 300, 5700, 6700},
+                                            {6500, 70,  6700, 7450},
+                                            {8000, 200, 7800, 8500},
+                                            };
+
+    for (const QVector<float> &p : posTiburones) {
+        Tiburon *t = new Tiburon(p[0], p[1], p[2], p[3]);
+        escena->addItem(t);
+        tiburones.append(t);
+    }
+
+    QVector<QVector<float>> posCangrejos = {
+                                            {700,  altoEscena-100, 500,  800 },
+                                            {2800, altoEscena-100, 2600, 3700},
+                                            {4000, altoEscena-100, 2600, 3700},
+                                            {5800, altoEscena-100, 5600, 6600},
+                                            {6800, altoEscena-100, 5600, 6400},
+                                            {8500, altoEscena-100, 8300, 9000},
+                                            };
+
+    for (const QVector<float> &p : posCangrejos) {
+        Cangrejo *c = new Cangrejo(p[0], p[1], p[2], p[3]);
+        escena->addItem(c);
+        cangrejos.append(c);
+    }
+
+    calamar = new Calamar(8500, 300);
+    escena->addItem(calamar);
 }
 
-// ─── Detección de colisiones ──────────────────────────────────
+void Nivel1::cargarMeta()
+{
+    QPixmap hoja(":/meta.png");
+    QPixmap imagenMeta = hoja.copy(4, 285, 197, 19);
+
+    QTransform rotacion;
+    rotacion.rotate(90);
+    imagenMeta = imagenMeta.transformed(rotacion);
+    imagenMeta = imagenMeta.scaled(imagenMeta.width(), altoEscena, Qt::IgnoreAspectRatio);
+
+    metaNivel = new Meta(LONGITUD_NIVEL - 150, 0, imagenMeta.width(), altoEscena);
+    escena->addItem(metaNivel);
+    metaNivel->setZValue(0);
+
+    QGraphicsPixmapItem *imgMeta = new QGraphicsPixmapItem(imagenMeta);
+    imgMeta->setPos(LONGITUD_NIVEL - 150, 0);
+    imgMeta->setZValue(1);
+    escena->addItem(imgMeta);
+}
 
 void Nivel1::verificarColisiones()
 {
     QList<QGraphicsItem*> colisiones = jugador->collidingItems();
+    bool colisionEnemigo = false;
 
     for (QGraphicsItem *item : colisiones) {
         if (dynamic_cast<Obstaculo*>(item)) {
@@ -182,7 +271,21 @@ void Nivel1::verificarColisiones()
 
             jugador->establecerPosicion(nx, ny);
         }
+
+        if (dynamic_cast<Tiburon*>(item) || dynamic_cast<Cangrejo*>(item))
+            colisionEnemigo = true;
+
+        if (dynamic_cast<Calamar*>(item)) {
+            float nx = jugador->obtenerX() - 80.0f;
+            if (nx < 0) nx = 0;
+            jugador->establecerPosicion(nx, jugador->obtenerY());
+        }
     }
+
+    if (colisionEnemigo)
+        velocidadJugador = VELOCIDAD_REDUCIDA;
+    else if (velocidadJugador < VELOCIDAD_NORMAL)
+        velocidadJugador += 0.05f;
 }
 
 void Nivel1::verificarMeta()
@@ -190,7 +293,6 @@ void Nivel1::verificarMeta()
     if (!metaNivel || !jugador)
         return;
 
-    // Si el jugador toca la meta, emitir señal de nivel terminado
     if (jugador->collidesWithItem(metaNivel)) {
         nivelCompletado = true;
         temporizadorJuego->stop();
