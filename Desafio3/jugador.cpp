@@ -13,17 +13,19 @@ Jugador::Jugador(QObject *parent)
     velocidadMaxCaida(3.0f),
     estaVivo(true),
     gravedadActiva(true),
+    frameAlternoRect(QRect()),
+    usarSpriteAlternado(false),
     frameActual(0),
     moviendose(false),
     mirandoDerecha(true),
     limiteYMinimo(0.0f),
     limiteYMaximo(0.0f)
 {
-    // Coordenadas individuales de cada frame
-    frames.append(QRect(6,   4,  167, 71)); // Frame 0
-    frames.append(QRect(178, 9,  161, 63)); // Frame 1
-    frames.append(QRect(30,  88, 143, 71)); // Frame 2
-    frames.append(QRect(179, 81, 122, 78)); // Frame 3
+    // Coordenadas frames nivel 1
+    frames.append(QRect(6,   4,  167, 71));
+    frames.append(QRect(178, 9,  161, 63));
+    frames.append(QRect(30,  88, 143, 71));
+    frames.append(QRect(179, 81, 122, 78));
 
     hoja = QPixmap(":/personaje1.png");
 
@@ -61,12 +63,20 @@ void Jugador::establecerVelocidad(float v)
     velocidad = v;
 }
 
+void Jugador::establecerSpriteNivel2(const QString &ruta, QRect frameRect)
+{
+    hojaAlterna         = QPixmap(ruta);
+    frameAlternoRect    = frameRect;
+    usarSpriteAlternado = true;
+    frameActual         = 0;
+    cargarFrame(0);
+}
+
 // ─── Física ───────────────────────────────────────────────────
 
 void Jugador::aplicarGravedad()
 {
-    if (!gravedadActiva)
-        return;
+    if (!gravedadActiva) return;
 
     velocidadY += gravedad;
     if (velocidadY > velocidadMaxCaida)
@@ -77,9 +87,10 @@ void Jugador::actualizar()
 {
     aplicarGravedad();
 
+    bool seEstaMoivendo = (velocidadX != 0.0f); // ← guardar antes de modificar
+
     x += velocidadX;
 
-    // Límite izquierdo: no puede salir por la izquierda
     if (x < 0) {
         x = 0;
         velocidadX = 0.0f;
@@ -88,7 +99,6 @@ void Jugador::actualizar()
     if (gravedadActiva)
         y += velocidadY;
 
-    // Aplicar límites verticales
     if (limiteYMaximo > 0) {
         if (y < limiteYMinimo) {
             y = limiteYMinimo;
@@ -102,9 +112,10 @@ void Jugador::actualizar()
 
     setPos(x, y);
 
-    if (velocidadX == 0.0f) {
+    if (!seEstaMoivendo) {
         moviendose = false;
-        cargarFrame(0);
+        if (!usarSpriteAlternado)
+            cargarFrame(0);
     }
 
     velocidadX = 0.0f;
@@ -114,7 +125,12 @@ void Jugador::actualizar()
 
 void Jugador::siguienteFrame()
 {
-    if (moviendose) {
+    if (usarSpriteAlternado) {
+        // Nivel 2: siempre anima independiente de teclas
+        frameActual = (frameActual + 1) % 2;
+        cargarFrame(frameActual);
+    } else if (moviendose) {
+        // Nivel 1: solo anima al moverse
         frameActual = (frameActual + 1) % frames.size();
         cargarFrame(frameActual);
     }
@@ -122,18 +138,26 @@ void Jugador::siguienteFrame()
 
 void Jugador::cargarFrame(int indice)
 {
-    if (hoja.isNull() || indice >= frames.size())
+    if (usarSpriteAlternado && !hojaAlterna.isNull()) {
+        QPixmap frame = hojaAlterna.copy(frameAlternoRect);
+
+        // Alternar reflejo horizontal para simular pedaleo
+        if (indice % 2 == 1)
+            frame = frame.transformed(QTransform().scale(-1, 1));
+
+        // Escalar al mismo tamaño que los rivales (50x80)
+        frame = frame.scaled(50, 80, Qt::IgnoreAspectRatio);
+        setPixmap(frame);
         return;
+    }
 
-    QRect   rect  = frames[indice];
-    QPixmap frame = hoja.copy(rect);
-
+    // Animación original nivel 1
+    if (hoja.isNull() || indice >= frames.size()) return;
+    QPixmap frame = hoja.copy(frames[indice]);
     if (mirandoDerecha)
         frame = frame.transformed(QTransform().scale(-1, 1));
-
     setPixmap(frame);
 }
-
 // ─── Getters ──────────────────────────────────────────────────
 
 float Jugador::obtenerX() const { return x; }
@@ -156,7 +180,8 @@ void Jugador::establecerEstaVivo(bool estado)
 
 void Jugador::establecerGravedad(bool activa)
 {
-    gravedadActiva = activa;
+    gravedadActiva     = activa;
+    usarSpriteAlternado = false; // resetear al cambiar de nivel
     if (!activa)
         velocidadY = 0.0f;
 }

@@ -77,6 +77,7 @@ private:
     void verificarColisiones();
     void verificarMeta();
     void mostrarMeta();
+    void establecerSpriteNivel2(const QString &ruta, QRect frameRect);
 };
 
 #endif // NIVEL2_H

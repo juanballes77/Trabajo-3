@@ -260,6 +260,7 @@ void Nivel2::cargarJugador()
     float yInicial = rect.height() * 0.75f;
     jugador->establecerPosicion(xInicial, yInicial);
     jugador->establecerGravedad(false);
+    jugador->establecerSpriteNivel2(":/ciclista.png", QRect(286, 39, 174, 413));
     jugador->setZValue(1);
 }
 

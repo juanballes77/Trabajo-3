@@ -40,10 +40,10 @@ MainWindow::MainWindow(QWidget *parent)
         stackedWidget->setCurrentIndex(IDX_JUEGO);
 
         QRectF rect = vistaJuego->rect();
-        escena->setSceneRect(0, 0, 10000, rect.height());
+        escena->setSceneRect(0, 0, 10000, rect.height()); // ← escena horizontal nivel 1
         vistaJuego->resetTransform();
 
-        nivel1->iniciar();
+        nivel1->iniciar(); // ← nivel1
     });
 
     connect(nivel1, &Nivel1::nivelTerminado, this, &MainWindow::onNivel1Terminado);

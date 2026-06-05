@@ -35,6 +35,7 @@ public:
     void establecerLimites(float yMinimo, float yMaximo);
     void establecerGravedad(bool activa);
     void establecerVelocidad(float v);
+    void establecerSpriteNivel2(const QString &ruta, QRect frameRect);
 
 private slots:
     void siguienteFrame();
@@ -53,13 +54,19 @@ private:
     bool  estaVivo;
     bool  gravedadActiva;
 
-    // Animación
+    // Animación nivel 1
     QPixmap        hoja;
-    QTimer        *temporizadorAnimacion;
-    int            frameActual;
-    bool           moviendose;
-    bool           mirandoDerecha;
     QVector<QRect> frames;
+
+    // Animación nivel 2
+    QPixmap hojaAlterna;
+    QRect   frameAlternoRect;
+    bool    usarSpriteAlternado;
+
+    QTimer *temporizadorAnimacion;
+    int     frameActual;
+    bool    moviendose;
+    bool    mirandoDerecha;
 
     static const int INTERVALO_ANIMACION_MS = 150;
 
