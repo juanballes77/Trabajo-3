@@ -6,14 +6,11 @@ Fondo::Fondo(const QString &rutaImagen, QObject *parent)
     frameActual(0),
     totalFrames(4)
 {
-    // Cargar el spritesheet completo
     hoja = QPixmap(rutaImagen);
 
-    // Crear y configurar el temporizador
     temporizador = new QTimer(this);
     connect(temporizador, &QTimer::timeout, this, &Fondo::siguienteFrame);
 
-    // Mostrar el primer frame al crear el objeto
     cargarFrame(0);
 }
 
@@ -43,15 +40,15 @@ void Fondo::siguienteFrame()
     cargarFrame(frameActual);
 }
 
-// ─── Recortar y aplicar el frame del spritesheet ──────────────
+// ─── Recortar frame avanzando en X ───────────────────────────
 
 void Fondo::cargarFrame(int indice)
 {
     if (hoja.isNull())
         return;
 
-    int y = FRAME_Y_BASE + (indice * FRAME_PASO);
+    int x = FRAME_X + (indice * FRAME_PASO);
 
-    QPixmap frame = hoja.copy(FRAME_X, y, FRAME_ANCHO, FRAME_ALTO);
+    QPixmap frame = hoja.copy(x, FRAME_Y, FRAME_ANCHO, FRAME_ALTO);
     setPixmap(frame);
 }

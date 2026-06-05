@@ -2,6 +2,7 @@
 #define NIVEL1_H
 
 #include <QTimer>
+#include <QKeyEvent>
 #include "nivelbase.h"
 
 class Nivel1 : public NivelBase
@@ -18,11 +19,20 @@ public:
     void reanudar()  override;
     void terminar()  override;
 
+    // Manejo de teclado
+    void teclaPresionada(QKeyEvent *evento);
+    void teclaLiberada(QKeyEvent *evento);
+
 private slots:
     void actualizar();
 
 private:
     QTimer *temporizadorJuego;
+
+    // Estado de teclas
+    bool teclaIzquierda;
+    bool teclaDerecha;
+    bool teclaImpulso;
 
     static const int INTERVALO_JUEGO_MS = 16; // ~60 fps
 
@@ -31,7 +41,8 @@ private:
     void cargarEnemigos();
     void cargarPlataformas();
 
-    // Detección
+    // Movimiento y detección
+    void procesarMovimiento();
     void verificarColisiones();
     void verificarMeta();
 };

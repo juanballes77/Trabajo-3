@@ -20,7 +20,7 @@ void Nivel2::iniciar()
     escena->clear();
 
     // Fondo heredado de NivelBase, solo se pasa la ruta
-    cargarFondo(":/fondo2.png");
+    cargarFondo(":/fondo1.png");
 
     cargarJugador();
     cargarPlataformas();

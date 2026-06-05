@@ -1,4 +1,5 @@
 #include "nivelbase.h"
+#include <QTransform>
 
 NivelBase::NivelBase(QGraphicsScene *escena, QObject *parent)
     : QObject(parent),
@@ -24,7 +25,14 @@ void NivelBase::cargarFondo(const QString &rutaImagen)
     fondo = new Fondo(rutaImagen);
     escena->addItem(fondo);
     fondo->setPos(0, 0);
-    fondo->setZValue(-1); // Siempre detrás de los demás elementos
+    fondo->setZValue(-1);
+
+    // Escalar el fondo para que ocupe toda la escena
+    QRectF rect = escena->sceneRect();
+    double escalaX = rect.width()  / fondo->pixmap().width();
+    double escalaY = rect.height() / fondo->pixmap().height();
+    fondo->setTransform(QTransform::fromScale(escalaX, escalaY));
+
     fondo->iniciar();
 }
 
@@ -38,17 +46,15 @@ void NivelBase::verificarEstado()
     if (!jugador)
         return;
 
-    // Si el jugador murió
     if (!jugador->obtenerEstaVivo()) {
         perderVida();
 
         if (vidasRestantes <= 0)
             emit juegoTerminado();
         else
-            iniciar(); // Reiniciar el nivel con una vida menos
+            iniciar();
     }
 
-    // Si el nivel fue completado
     if (nivelCompletado)
         emit nivelTerminado();
 }

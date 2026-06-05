@@ -113,6 +113,14 @@ build CMakeFiles/Desafio3.dir/nivel2.cpp.obj: CXX_COMPILER__Desafio3_unscanned_D
   OBJECT_DIR = CMakeFiles\Desafio3.dir
   OBJECT_FILE_DIR = CMakeFiles\Desafio3.dir
 
+build CMakeFiles/Desafio3.dir/menu.cpp.obj: CXX_COMPILER__Desafio3_unscanned_Debug C$:/Users/juand/OneDrive/Documentos/Desafio3/menu.cpp || cmake_object_order_depends_target_Desafio3
+  DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
+  DEP_FILE = CMakeFiles\Desafio3.dir\menu.cpp.obj.d
+  FLAGS = -DQT_QML_DEBUG -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -IC:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/include -isystem C:/Qt/6.10.2/mingw_64/include/QtCore -isystem C:/Qt/6.10.2/mingw_64/include -isystem C:/Qt/6.10.2/mingw_64/mkspecs/win32-g++ -isystem C:/Qt/6.10.2/mingw_64/include/QtWidgets -isystem C:/Qt/6.10.2/mingw_64/include/QtGui
+  OBJECT_DIR = CMakeFiles\Desafio3.dir
+  OBJECT_FILE_DIR = CMakeFiles\Desafio3.dir
+
 build CMakeFiles/Desafio3.dir/Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp.obj: CXX_COMPILER__Desafio3_unscanned_Debug C$:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp || cmake_object_order_depends_target_Desafio3
   DEFINES = -DMINGW_HAS_SECURE_API=1 -DQT_CORE_LIB -DQT_GUI_LIB -DQT_NEEDS_QMAIN -DQT_WIDGETS_LIB -DUNICODE -DWIN32 -DWIN64 -D_ENABLE_EXTENDED_ALIGNED_STORAGE -D_UNICODE -D_WIN64
   DEP_FILE = CMakeFiles\Desafio3.dir\Desafio3_autogen\EWIEGA46WW\qrc_recursos.cpp.obj.d
@@ -129,7 +137,7 @@ build CMakeFiles/Desafio3.dir/Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp.obj: 
 #############################################
 # Link the executable Desafio3.exe
 
-build Desafio3.exe: CXX_EXECUTABLE_LINKER__Desafio3_Debug CMakeFiles/Desafio3.dir/Desafio3_autogen/mocs_compilation.cpp.obj CMakeFiles/Desafio3.dir/main.cpp.obj CMakeFiles/Desafio3.dir/mainwindow.cpp.obj CMakeFiles/Desafio3.dir/jugador.cpp.obj CMakeFiles/Desafio3.dir/fondo.cpp.obj CMakeFiles/Desafio3.dir/nivelbase.cpp.obj CMakeFiles/Desafio3.dir/nivel1.cpp.obj CMakeFiles/Desafio3.dir/nivel2.cpp.obj CMakeFiles/Desafio3.dir/Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp.obj | C$:/Qt/6.10.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.10.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.10.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.10.2/mingw_64/lib/libQt6EntryPoint.a || Desafio3_autogen Desafio3_autogen_timestamp_deps
+build Desafio3.exe: CXX_EXECUTABLE_LINKER__Desafio3_Debug CMakeFiles/Desafio3.dir/Desafio3_autogen/mocs_compilation.cpp.obj CMakeFiles/Desafio3.dir/main.cpp.obj CMakeFiles/Desafio3.dir/mainwindow.cpp.obj CMakeFiles/Desafio3.dir/jugador.cpp.obj CMakeFiles/Desafio3.dir/fondo.cpp.obj CMakeFiles/Desafio3.dir/nivelbase.cpp.obj CMakeFiles/Desafio3.dir/nivel1.cpp.obj CMakeFiles/Desafio3.dir/nivel2.cpp.obj CMakeFiles/Desafio3.dir/menu.cpp.obj CMakeFiles/Desafio3.dir/Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp.obj | C$:/Qt/6.10.2/mingw_64/lib/libQt6Widgets.a C$:/Qt/6.10.2/mingw_64/lib/libQt6Gui.a C$:/Qt/6.10.2/mingw_64/lib/libQt6Core.a C$:/Qt/6.10.2/mingw_64/lib/libQt6EntryPoint.a || Desafio3_autogen Desafio3_autogen_timestamp_deps
   FLAGS = -DQT_QML_DEBUG -g
   LINK_FLAGS = -mwindows
   LINK_LIBRARIES = C:/Qt/6.10.2/mingw_64/lib/libQt6Widgets.a  C:/Qt/6.10.2/mingw_64/lib/libQt6Gui.a  C:/Qt/6.10.2/mingw_64/lib/libQt6Core.a  -lmpr  -luserenv  -lmingw32  C:/Qt/6.10.2/mingw_64/lib/libQt6EntryPoint.a  -lshell32  -ld3d11  -ldxgi  -ldxguid  -ld3d12  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
@@ -233,7 +241,7 @@ build Desafio3_autogen/timestamp Desafio3_autogen/mocs_compilation.cpp | ${cmake
 #############################################
 # Custom command for Desafio3_autogen\EWIEGA46WW\qrc_recursos.cpp
 
-build Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp | ${cmake_ninja_workdir}Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp: CUSTOM_COMMAND C$:/Users/juand/OneDrive/Documentos/Desafio3/recursos.qrc CMakeFiles/Desafio3_autogen.dir/AutoRcc_recursos_EWIEGA46WW_Info.json C$:/Users/juand/OneDrive/Documentos/Desafio3/fondo1.png C$:/Qt/6.10.2/mingw_64/bin/rcc.exe C$:/Qt/6.10.2/mingw_64/bin/rcc.exe || Desafio3_autogen Desafio3_autogen_timestamp_deps
+build Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp | ${cmake_ninja_workdir}Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp: CUSTOM_COMMAND C$:/Users/juand/OneDrive/Documentos/Desafio3/recursos.qrc CMakeFiles/Desafio3_autogen.dir/AutoRcc_recursos_EWIEGA46WW_Info.json C$:/Users/juand/OneDrive/Documentos/Desafio3/personaje1.png C$:/Users/juand/OneDrive/Documentos/Desafio3/fondo1.png C$:/Qt/6.10.2/mingw_64/bin/rcc.exe C$:/Qt/6.10.2/mingw_64/bin/rcc.exe || Desafio3_autogen Desafio3_autogen_timestamp_deps
   COMMAND = C:\windows\system32\cmd.exe /C "cd /D C:\Users\juand\OneDrive\Documentos\Desafio3\build\Desktop_Qt_6_10_2_MinGW_64_bit-Debug && C:\Qt\Tools\CMake_64\bin\cmake.exe -E cmake_autorcc C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/Desafio3_autogen.dir/AutoRcc_recursos_EWIEGA46WW_Info.json Debug"
   DESC = Automatic RCC for recursos.qrc
   restat = 1

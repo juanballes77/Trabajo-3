@@ -2,7 +2,10 @@
 
 Nivel1::Nivel1(QGraphicsScene *escena, QObject *parent)
     : NivelBase(escena, parent),
-    temporizadorJuego(nullptr)
+    temporizadorJuego(nullptr),
+    teclaIzquierda(false),
+    teclaDerecha(false),
+    teclaImpulso(false)
 {
     temporizadorJuego = new QTimer(this);
     connect(temporizadorJuego, &QTimer::timeout, this, &Nivel1::actualizar);
@@ -19,9 +22,7 @@ void Nivel1::iniciar()
 {
     escena->clear();
 
-    // Fondo heredado de NivelBase, solo se pasa la ruta
     cargarFondo(":/fondo1.png");
-
     cargarJugador();
     cargarPlataformas();
     cargarEnemigos();
@@ -56,18 +57,51 @@ void Nivel1::terminar()
         fondo->detener();
 }
 
-// ─── Loop principal del nivel ─────────────────────────────────
+// ─── Loop principal ───────────────────────────────────────────
 
 void Nivel1::actualizar()
 {
     if (!jugador)
         return;
 
+    procesarMovimiento();
     jugador->actualizar();
     verificarColisiones();
     verificarMeta();
     verificarEstado();
     actualizarHUD();
+}
+
+// ─── Teclado ──────────────────────────────────────────────────
+
+void Nivel1::teclaPresionada(QKeyEvent *evento)
+{
+    switch (evento->key()) {
+    case Qt::Key_A:     teclaIzquierda = true;  break;
+    case Qt::Key_D:     teclaDerecha   = true;  break;
+    case Qt::Key_Space: teclaImpulso   = true;  break;
+    default: break;
+    }
+}
+
+void Nivel1::teclaLiberada(QKeyEvent *evento)
+{
+    switch (evento->key()) {
+    case Qt::Key_A:     teclaIzquierda = false; break;
+    case Qt::Key_D:     teclaDerecha   = false; break;
+    case Qt::Key_Space: teclaImpulso   = false; break;
+    default: break;
+    }
+}
+
+// ─── Movimiento acuático ──────────────────────────────────────
+
+void Nivel1::procesarMovimiento()
+{
+    if (teclaIzquierda) jugador->moverIzquierda();
+    if (teclaDerecha)   jugador->moverDerecha();
+    if (teclaImpulso)   jugador->impulsarse();
+    // Sin impulso el jugador se hunde solo por la gravedad reducida
 }
 
 // ─── Carga de elementos ───────────────────────────────────────
@@ -99,7 +133,6 @@ void Nivel1::verificarColisiones()
 
 void Nivel1::verificarMeta()
 {
-    // Se implementará cuando definamos la posición de la meta
-    // Ejemplo: if (jugador->obtenerX() >= META_X)
-    //              nivelCompletado = true;
+    // if (jugador->obtenerX() >= META_X)
+    //     nivelCompletado = true;
 }

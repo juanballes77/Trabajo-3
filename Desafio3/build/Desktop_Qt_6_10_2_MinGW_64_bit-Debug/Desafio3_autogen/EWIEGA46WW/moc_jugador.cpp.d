@@ -1,6 +1,9 @@
 C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/EWIEGA46WW/moc_jugador.cpp: C:/Users/juand/OneDrive/Documentos/Desafio3/jugador.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/moc_predefs.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/QObject \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/QRect \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/QTimer \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/QVector \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q20functional.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q20iterator.h \
@@ -9,6 +12,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/q20utility.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q23type_traits.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q23utility.h \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/qabstracteventdispatcher.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qalgorithms.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qalloc.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qanystringview.h \
@@ -19,6 +23,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/qatomic.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qatomic_cxx11.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qbasicatomic.h \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/qbasictimer.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qbindingstorage.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qbytearray.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qbytearrayalgorithms.h \
@@ -38,7 +43,9 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/qcontiguouscache.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qdarwinhelpers.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qdatastream.h \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/qdeadlinetimer.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qdebug.h \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/qeventloop.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qexceptionhandling.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qflags.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qfloat16.h \
@@ -111,6 +118,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/qtenvironmentvariables.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qtextstream.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qtformat_impl.h \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/qtimer.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qtmetamacros.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qtnoop.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qtpreprocessorsupport.h \
@@ -124,9 +132,11 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/qutf8stringview.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qvariant.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qvarlengtharray.h \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/qvector.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qyieldcpu.h \
+  C:/Qt/6.10.2/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qcolor.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qimage.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qpaintdevice.h \

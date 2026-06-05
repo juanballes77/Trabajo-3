@@ -1,7 +1,9 @@
 C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/EWIEGA46WW/moc_nivel2.cpp: C:/Users/juand/OneDrive/Documentos/Desafio3/nivel2.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/moc_predefs.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/QObject \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/QRect \
   C:/Qt/6.10.2/mingw_64/include/QtCore/QTimer \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/QVector \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q17memory.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q20functional.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/q20iterator.h \
@@ -131,6 +133,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/qutf8stringview.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qvariant.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qvarlengtharray.h \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/qvector.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qversiontagging.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qyieldcpu.h \

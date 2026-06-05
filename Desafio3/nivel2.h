@@ -26,8 +26,7 @@ private:
 
     static const int INTERVALO_JUEGO_MS = 16; // ~60 fps
 
-    // Métodos de carga (se completarán cuando se defina la temática)
-    void cargarFondo();
+    // Métodos de carga (cargarFondo() se hereda de NivelBase)
     void cargarJugador();
     void cargarEnemigos();
     void cargarPlataformas();

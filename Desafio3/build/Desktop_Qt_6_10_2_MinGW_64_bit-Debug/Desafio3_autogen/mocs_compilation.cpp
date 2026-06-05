@@ -2,6 +2,7 @@
 #include "EWIEGA46WW/moc_fondo.cpp"
 #include "EWIEGA46WW/moc_jugador.cpp"
 #include "EWIEGA46WW/moc_mainwindow.cpp"
+#include "EWIEGA46WW/moc_menu.cpp"
 #include "EWIEGA46WW/moc_nivel1.cpp"
 #include "EWIEGA46WW/moc_nivel2.cpp"
 #include "EWIEGA46WW/moc_nivelbase.cpp"

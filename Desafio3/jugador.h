@@ -3,6 +3,10 @@
 
 #include <QGraphicsPixmapItem>
 #include <QObject>
+#include <QTimer>
+#include <QPixmap>
+#include <QRect>
+#include <QVector>
 
 class Jugador : public QObject, public QGraphicsPixmapItem
 {
@@ -11,10 +15,10 @@ class Jugador : public QObject, public QGraphicsPixmapItem
 public:
     explicit Jugador(QObject *parent = nullptr);
 
-    // Movimiento
+    // Movimiento nivel acuático
     void moverIzquierda();
     void moverDerecha();
-    void saltar();
+    void impulsarse();
 
     // Física
     void aplicarGravedad();
@@ -23,13 +27,14 @@ public:
     // Getters
     float obtenerX() const;
     float obtenerY() const;
-    bool obtenerEstaVivo() const;
-    bool obtenerEstaEnSuelo() const;
+    bool  obtenerEstaVivo() const;
 
     // Setters
     void establecerPosicion(float x, float y);
-    void establecerEstaEnSuelo(bool estado);
     void establecerEstaVivo(bool estado);
+
+private slots:
+    void siguienteFrame();
 
 private:
     float x;
@@ -37,10 +42,22 @@ private:
     float velocidadX;
     float velocidadY;
     float velocidad;
-    float fuerzaSalto;
+    float fuerzaImpulso;
     float gravedad;
-    bool  estaEnSuelo;
+    float velocidadMaxCaida;
     bool  estaVivo;
+
+    // Animación
+    QPixmap        hoja;
+    QTimer        *temporizadorAnimacion;
+    int            frameActual;
+    bool           moviendose;
+    bool           mirandoDerecha;
+    QVector<QRect> frames; // Coordenadas individuales de cada frame
+
+    static const int INTERVALO_ANIMACION_MS = 150;
+
+    void cargarFrame(int indice);
 };
 
 #endif // JUGADOR_H

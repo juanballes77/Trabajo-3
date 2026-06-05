@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>fondo1.png</file>
+        <file>personaje1.png</file>
     </qresource>
 </RCC>
