@@ -1,0 +1,15 @@
+# ninja log v6
+66	5805	8023312876225934	Desafio3_autogen/timestamp	c8c1e1104192b313
+66	5805	8023312876225934	Desafio3_autogen/mocs_compilation.cpp	c8c1e1104192b313
+66	5805	8023312876225934	C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/timestamp	c8c1e1104192b313
+66	5805	8023312876225934	C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/mocs_compilation.cpp	c8c1e1104192b313
+5824	6783	8023312889418125	Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp	63c67bc841ee547e
+5824	6783	8023312889418125	C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp	63c67bc841ee547e
+7453	13079	8023312898754787	CMakeFiles/Desafio3.dir/Desafio3_autogen/EWIEGA46WW/qrc_recursos.cpp.obj	cdbbbd4cd1de7874
+7204	15522	8023312896275296	CMakeFiles/Desafio3.dir/nivelbase.cpp.obj	154ba6f45de9a7ea
+6836	15576	8023312892575911	CMakeFiles/Desafio3.dir/main.cpp.obj	205433f50bcba2b6
+7276	15830	8023312896973020	CMakeFiles/Desafio3.dir/nivel1.cpp.obj	5bae00058f67f840
+6925	15914	8023312893475560	CMakeFiles/Desafio3.dir/mainwindow.cpp.obj	10376f1d5820c718
+6786	16023	8023312892096240	CMakeFiles/Desafio3.dir/Desafio3_autogen/mocs_compilation.cpp.obj	6dd2a625e49a4316
+6961	16162	8023312893834264	CMakeFiles/Desafio3.dir/jugador.cpp.obj	fd7b5fab92efb197
+7072	16791	8023312894940984	CMakeFiles/Desafio3.dir/fondo.cpp.obj	87a3f6ea34a4dd84
