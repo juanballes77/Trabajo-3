@@ -193,6 +193,7 @@ Desafio3_autogen/timestamp: \
 	C:/Qt/6.10.2/mingw_64/include/QtGui/qwindowdefs.h \
 	C:/Qt/6.10.2/mingw_64/include/QtGui/qwindowdefs_win.h \
 	C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
+	C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsRectItem \
 	C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsScene \
 	C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsView \
 	C:/Qt/6.10.2/mingw_64/include/QtWidgets/QLabel \
@@ -624,6 +625,8 @@ Desafio3_autogen/timestamp: \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeRCCompiler.cmake \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/3.30.5/CMakeSystem.cmake \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/moc_predefs.h \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.cpp \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.cpp \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/jugador.cpp \
@@ -633,12 +636,18 @@ Desafio3_autogen/timestamp: \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/mainwindow.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/menu.cpp \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/menu.h \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/meta.cpp \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/meta.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/nivel1.cpp \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/nivel1.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/nivel2.cpp \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/nivel2.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/nivelbase.cpp \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/nivelbase.h \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/obstaculo.cpp \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/obstaculo.h \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.cpp \
+	C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.h \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/recursos.qrc \
 	C:/Users/juand/OneDrive/Documentos/Desafio3/mainwindow.ui \
 	C:/Qt/Tools/CMake_64/bin/cmake.exe

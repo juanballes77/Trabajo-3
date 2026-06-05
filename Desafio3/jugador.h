@@ -15,7 +15,7 @@ class Jugador : public QObject, public QGraphicsPixmapItem
 public:
     explicit Jugador(QObject *parent = nullptr);
 
-    // Movimiento nivel acuático
+    // Movimiento
     void moverIzquierda();
     void moverDerecha();
     void impulsarse();
@@ -32,6 +32,7 @@ public:
     // Setters
     void establecerPosicion(float x, float y);
     void establecerEstaVivo(bool estado);
+    void establecerGravedad(bool activa);
 
 private slots:
     void siguienteFrame();
@@ -46,6 +47,7 @@ private:
     float gravedad;
     float velocidadMaxCaida;
     bool  estaVivo;
+    bool  gravedadActiva;
 
     // Animación
     QPixmap        hoja;
@@ -53,7 +55,7 @@ private:
     int            frameActual;
     bool           moviendose;
     bool           mirandoDerecha;
-    QVector<QRect> frames; // Coordenadas individuales de cada frame
+    QVector<QRect> frames;
 
     static const int INTERVALO_ANIMACION_MS = 150;
 

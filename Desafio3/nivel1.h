@@ -3,7 +3,10 @@
 
 #include <QTimer>
 #include <QKeyEvent>
+#include <QVector>
 #include "nivelbase.h"
+#include "obstaculo.h"
+#include "meta.h"
 
 class Nivel1 : public NivelBase
 {
@@ -13,13 +16,11 @@ public:
     explicit Nivel1(QGraphicsScene *escena, QObject *parent = nullptr);
     ~Nivel1();
 
-    // Implementación de métodos virtuales
     void iniciar()   override;
     void pausar()    override;
     void reanudar()  override;
     void terminar()  override;
 
-    // Manejo de teclado
     void teclaPresionada(QKeyEvent *evento);
     void teclaLiberada(QKeyEvent *evento);
 
@@ -29,19 +30,24 @@ private slots:
 private:
     QTimer *temporizadorJuego;
 
-    // Estado de teclas
+    // Teclas
     bool teclaIzquierda;
     bool teclaDerecha;
     bool teclaImpulso;
 
-    static const int INTERVALO_JUEGO_MS = 16; // ~60 fps
+    // Elementos del nivel
+    QVector<Obstaculo*> obstaculos;
+    Meta               *metaNivel;
 
-    // Métodos de carga
+    // Longitud del nivel
+    static const int LONGITUD_NIVEL  = 5000;
+    static const int INTERVALO_JUEGO_MS = 16;
+
     void cargarJugador();
+    void cargarObstaculos();
+    void cargarMeta();
     void cargarEnemigos();
-    void cargarPlataformas();
 
-    // Movimiento y detección
     void procesarMovimiento();
     void verificarColisiones();
     void verificarMeta();

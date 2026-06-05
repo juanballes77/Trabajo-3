@@ -194,6 +194,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtGui/qwindowdefs.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/qwindowdefs_win.h \
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsPixmapItem \
+  C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsRectItem \
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsScene \
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsView \
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QLabel \
@@ -436,8 +437,12 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/time.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/vadefs.h \
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/jugador.h \
-  C:/Users/juand/OneDrive/Documentos/Desafio3/menu.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/meta.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/nivel1.h \
-  C:/Users/juand/OneDrive/Documentos/Desafio3/nivelbase.h
+  C:/Users/juand/OneDrive/Documentos/Desafio3/nivel2.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/nivelbase.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/obstaculo.h \
+  C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.h

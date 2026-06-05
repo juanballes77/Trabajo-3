@@ -12,25 +12,31 @@ Jugador::Jugador(QObject *parent)
     gravedad(0.2f),
     velocidadMaxCaida(3.0f),
     estaVivo(true),
+    gravedadActiva(true),
     frameActual(0),
     moviendose(false),
     mirandoDerecha(true)
 {
-    // Definir coordenadas individuales de cada frame (x, y, ancho, alto)
+    // Coordenadas individuales de cada frame
     frames.append(QRect(6,   4,  167, 71)); // Frame 0
     frames.append(QRect(178, 9,  161, 63)); // Frame 1
     frames.append(QRect(30,  88, 143, 71)); // Frame 2
     frames.append(QRect(179, 81, 122, 78)); // Frame 3
 
-    // Cargar spritesheet
+    // Rectángulo temporal nivel 2 (verde)
+    QPixmap temporal(50, 80);
+    temporal.fill(Qt::green);
+    setPixmap(temporal);
+
+    // Coordenadas individuales de cada frame
+    frames.append(QRect(6,   4,  167, 71));
+
     hoja = QPixmap(":/personaje1.png");
 
-    // Configurar temporizador de animación
     temporizadorAnimacion = new QTimer(this);
     connect(temporizadorAnimacion, &QTimer::timeout, this, &Jugador::siguienteFrame);
     temporizadorAnimacion->start(INTERVALO_ANIMACION_MS);
 
-    // Mostrar primer frame
     cargarFrame(0);
 }
 
@@ -38,29 +44,32 @@ Jugador::Jugador(QObject *parent)
 
 void Jugador::moverIzquierda()
 {
-    velocidadX    = -velocidad;
-    moviendose    = true;
+    velocidadX     = -velocidad;
+    moviendose     = true;
     mirandoDerecha = false;
 }
 
 void Jugador::moverDerecha()
 {
-    velocidadX    = velocidad;
-    moviendose    = true;
+    velocidadX     = velocidad;
+    moviendose     = true;
     mirandoDerecha = true;
 }
 
 void Jugador::impulsarse()
 {
-    velocidadY = fuerzaImpulso;
+    if (gravedadActiva)
+        velocidadY = fuerzaImpulso;
 }
 
 // ─── Física ───────────────────────────────────────────────────
 
 void Jugador::aplicarGravedad()
 {
-    velocidadY += gravedad;
+    if (!gravedadActiva)
+        return;
 
+    velocidadY += gravedad;
     if (velocidadY > velocidadMaxCaida)
         velocidadY = velocidadMaxCaida;
 }
@@ -70,7 +79,10 @@ void Jugador::actualizar()
     aplicarGravedad();
 
     x += velocidadX;
-    y += velocidadY;
+
+    // Solo actualizar Y si la gravedad está activa
+    if (gravedadActiva)
+        y += velocidadY;
 
     setPos(x, y);
 
@@ -97,13 +109,11 @@ void Jugador::cargarFrame(int indice)
     if (hoja.isNull() || indice >= frames.size())
         return;
 
-    QRect rect    = frames[indice];
+    QRect   rect  = frames[indice];
     QPixmap frame = hoja.copy(rect);
 
-
-    if (mirandoDerecha) {
+    if (mirandoDerecha)
         frame = frame.transformed(QTransform().scale(-1, 1));
-    }
 
     setPixmap(frame);
 }
@@ -126,4 +136,11 @@ void Jugador::establecerPosicion(float x, float y)
 void Jugador::establecerEstaVivo(bool estado)
 {
     estaVivo = estado;
+}
+
+void Jugador::establecerGravedad(bool activa)
+{
+    gravedadActiva = activa;
+    if (!activa)
+        velocidadY = 0.0f; // Resetear velocidad vertical
 }

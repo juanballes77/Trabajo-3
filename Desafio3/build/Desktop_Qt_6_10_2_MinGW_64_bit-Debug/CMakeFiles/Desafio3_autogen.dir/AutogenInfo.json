@@ -325,6 +325,12 @@
 	"HEADERS" : 
 	[
 		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.h",
+			"MU",
+			"EWIEGA46WW/moc_enemigociclista.cpp",
+			null
+		],
+		[
 			"C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.h",
 			"MU",
 			"EWIEGA46WW/moc_fondo.cpp",
@@ -349,6 +355,12 @@
 			null
 		],
 		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/meta.h",
+			"MU",
+			"EWIEGA46WW/moc_meta.cpp",
+			null
+		],
+		[
 			"C:/Users/juand/OneDrive/Documentos/Desafio3/nivel1.h",
 			"MU",
 			"EWIEGA46WW/moc_nivel1.cpp",
@@ -364,6 +376,18 @@
 			"C:/Users/juand/OneDrive/Documentos/Desafio3/nivelbase.h",
 			"MU",
 			"EWIEGA46WW/moc_nivelbase.cpp",
+			null
+		],
+		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/obstaculo.h",
+			"MU",
+			"EWIEGA46WW/moc_obstaculo.cpp",
+			null
+		],
+		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.h",
+			"MU",
+			"EWIEGA46WW/moc_pantallatransicion.cpp",
 			null
 		]
 	],
@@ -438,6 +462,11 @@
 	"SETTINGS_FILE" : "C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/Desafio3_autogen.dir/AutogenUsed.txt",
 	"SOURCES" : 
 	[
+		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.cpp",
+			"MU",
+			null
+		],
 		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.cpp", "MU", null ],
 		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/jugador.cpp", "MU", null ],
 		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/main.cpp", "MU", null ],
@@ -447,10 +476,21 @@
 			null
 		],
 		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/menu.cpp", "MU", null ],
+		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/meta.cpp", "MU", null ],
 		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/nivel1.cpp", "MU", null ],
 		[ "C:/Users/juand/OneDrive/Documentos/Desafio3/nivel2.cpp", "MU", null ],
 		[
 			"C:/Users/juand/OneDrive/Documentos/Desafio3/nivelbase.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/obstaculo.cpp",
+			"MU",
+			null
+		],
+		[
+			"C:/Users/juand/OneDrive/Documentos/Desafio3/pantallatransicion.cpp",
 			"MU",
 			null
 		]

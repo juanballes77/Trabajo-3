@@ -10,6 +10,7 @@
 	"INPUTS" : 
 	[
 		"C:/Users/juand/OneDrive/Documentos/Desafio3/personaje1.png",
+		"C:/Users/juand/OneDrive/Documentos/Desafio3/road.png",
 		"C:/Users/juand/OneDrive/Documentos/Desafio3/fondo1.png"
 	],
 	"LOCK_FILE" : "C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/CMakeFiles/Desafio3_autogen.dir/AutoRcc_recursos_EWIEGA46WW_Lock.lock",
