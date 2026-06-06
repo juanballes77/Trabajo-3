@@ -410,7 +410,6 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/Tools/mingw1310_64/x86_64-w64-mingw32/include/wchar.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/enemigo.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/enemigociclista.h \
-  C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/jugador.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/nivelbase.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/obstaculo.h

@@ -21,8 +21,6 @@ public:
 
     float obtenerX() const;
     float obtenerY() const;
-    bool  obtenerEstaVivo() const;
-    void  establecerEstaVivo(bool estado);
 
 protected:
     float x;
@@ -30,18 +28,15 @@ protected:
     float velocidad;
     float limiteIzquierdo;
     float limiteDerecho;
-    float direccion;    // 1 = derecha, -1 = izquierda
-    bool  estaVivo;
+    float direccion;
+    bool  mirandoDerecha;
 
-    // Animación
     QPixmap        hoja;
     QTimer        *temporizadorAnimacion;
     int            frameActual;
     QVector<QRect> frames;
-    bool           mirandoDerecha;
 
     void patrullar();
-    void siguienteFrame();
     virtual void cargarFrame(int indice) = 0;
 
 private slots:

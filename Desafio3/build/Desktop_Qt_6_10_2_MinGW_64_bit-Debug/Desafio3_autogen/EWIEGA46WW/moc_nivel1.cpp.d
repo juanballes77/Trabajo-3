@@ -411,7 +411,6 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Users/juand/OneDrive/Documentos/Desafio3/calamar.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/cangrejo.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/enemigo.h \
-  C:/Users/juand/OneDrive/Documentos/Desafio3/fondo.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/jugador.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/meta.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/nivelbase.h \

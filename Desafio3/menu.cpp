@@ -27,7 +27,7 @@ void Menu::configurarUI()
     layout->setAlignment(Qt::AlignCenter);
     layout->setSpacing(20);
 
-    etiquetaTitulo = new QLabel("NOMBRE DEL JUEGO", this);
+    etiquetaTitulo = new QLabel("WaveToWheels", this);
     etiquetaTitulo->setAlignment(Qt::AlignCenter);
     etiquetaTitulo->setObjectName("etiquetaTitulo");
 

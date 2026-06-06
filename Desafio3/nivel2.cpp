@@ -21,7 +21,7 @@ Nivel2::Nivel2(QGraphicsScene *escena, QObject *parent)
     aceleracion(0.7f),
     desaceleracion(0.1f),
     repeticionesFondo(0),
-    repeticionesParaMeta(20),
+    repeticionesParaMeta(10),
     metaVisible(false),
     metaNivel2(nullptr)
 {
@@ -44,7 +44,6 @@ Nivel2::~Nivel2()
 
 void Nivel2::iniciar()
 {
-    // Resetear punteros ANTES de limpiar la escena
     copiasParallax.clear();
     fondoCarretera1 = nullptr;
     fondoCarretera2 = nullptr;
@@ -101,8 +100,7 @@ void Nivel2::terminar()
 
 void Nivel2::actualizar()
 {
-    if (!jugador)
-        return;
+    if (!jugador) return;
 
     if (teclaAcelerar) {
         if (velocidadActual < velocidadMaxima)
@@ -136,7 +134,6 @@ void Nivel2::actualizar()
     verificarColisiones();
     verificarMeta();
     verificarEstado();
-    actualizarHUD();
 }
 
 void Nivel2::teclaPresionada(QKeyEvent *evento)
@@ -178,7 +175,7 @@ void Nivel2::liminarJugadorEnCarretera()
 
 void Nivel2::generarObstaculo()
 {
-    int cantidad = 1 + (std::rand() % 9);
+    int cantidad = 1 + (std::rand() % 6);
 
     for (int i = 0; i < cantidad; i++) {
         float rangoX = carreteraDerecha - carreteraIzquierda - 60;
@@ -194,7 +191,7 @@ void Nivel2::generarObstaculo()
 
 void Nivel2::generarEnemigo()
 {
-    int cantidad = 1 + (std::rand() % 5);
+    int cantidad = 1 + (std::rand() % 4);
 
     for (int i = 0; i < cantidad; i++) {
         float rangoX = carreteraDerecha - carreteraIzquierda - 50;
@@ -264,11 +261,6 @@ void Nivel2::cargarJugador()
     jugador->setZValue(1);
 }
 
-void Nivel2::cargarEnemigos()
-{
-    // Los enemigos se generan esporádicamente con temporizadorEnemigos
-}
-
 void Nivel2::verificarColisiones()
 {
     QList<QGraphicsItem*> colisiones = jugador->collidingItems();
@@ -303,8 +295,7 @@ void Nivel2::mostrarMeta()
 
 void Nivel2::verificarMeta()
 {
-    if (!metaVisible || !metaNivel2 || !jugador)
-        return;
+    if (!metaVisible || !metaNivel2 || !jugador) return;
 
     if (jugador->collidesWithItem(metaNivel2)) {
         nivelCompletado = true;

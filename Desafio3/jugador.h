@@ -15,24 +15,17 @@ class Jugador : public QObject, public QGraphicsPixmapItem
 public:
     explicit Jugador(QObject *parent = nullptr);
 
-    // Movimiento
     void moverIzquierda();
     void moverDerecha();
     void impulsarse();
-
-    // Física
     void aplicarGravedad();
     void actualizar();
 
-    // Getters
     float obtenerX() const;
     float obtenerY() const;
-    bool  obtenerEstaVivo() const;
 
-    // Setters
     void establecerPosicion(float x, float y);
-    void establecerEstaVivo(bool estado);
-    void establecerLimites(float yMinimo, float yMaximo);
+    void establecerLimites(float yMaximo);
     void establecerGravedad(bool activa);
     void establecerVelocidad(float v);
     void establecerSpriteNivel2(const QString &ruta, QRect frameRect);
@@ -49,24 +42,18 @@ private:
     float fuerzaImpulso;
     float gravedad;
     float velocidadMaxCaida;
-    float limiteYMinimo;
     float limiteYMaximo;
-    bool  estaVivo;
     bool  gravedadActiva;
+    bool  usarSpriteAlternado;
 
-    // Animación nivel 1
     QPixmap        hoja;
+    QPixmap        hojaAlterna;
+    QRect          frameAlternoRect;
     QVector<QRect> frames;
-
-    // Animación nivel 2
-    QPixmap hojaAlterna;
-    QRect   frameAlternoRect;
-    bool    usarSpriteAlternado;
-
-    QTimer *temporizadorAnimacion;
-    int     frameActual;
-    bool    moviendose;
-    bool    mirandoDerecha;
+    QTimer        *temporizadorAnimacion;
+    int            frameActual;
+    bool           moviendose;
+    bool           mirandoDerecha;
 
     static const int INTERVALO_ANIMACION_MS = 150;
 

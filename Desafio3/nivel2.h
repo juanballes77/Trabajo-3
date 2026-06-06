@@ -35,39 +35,32 @@ private:
     QTimer *temporizadorObstaculos;
     QTimer *temporizadorEnemigos;
 
-    // Teclas
     bool teclaIzquierda;
     bool teclaDerecha;
     bool teclaAcelerar;
 
-    // Scroll
     float velocidadScroll;
-
-    // Límites de la carretera
+    float velocidadActual;
+    float velocidadMaxima;
+    float aceleracion;
+    float desaceleracion;
     float carreteraIzquierda;
     float carreteraDerecha;
 
-    float velocidadActual;      // Velocidad actual del scroll
-    float velocidadMaxima;      // Velocidad máxima al acelerar
-    float aceleracion;          // Cuánto aumenta por frame
-    float desaceleracion;       // Cuánto disminuye por frame
-
-    int repeticionesFondo;
-    int repeticionesParaMeta;
+    int  repeticionesFondo;
+    int  repeticionesParaMeta;
     bool metaVisible;
     QGraphicsRectItem *metaNivel2;
 
-    // Elementos del nivel
-    QVector<Obstaculo*>      obstaculos;
+    QVector<Obstaculo*>       obstaculos;
     QVector<EnemigoCiclista*> enemigos;
 
-    static const int INTERVALO_JUEGO_MS       = 16;
-    static const int INTERVALO_OBSTACULOS_MS  = 3000; // Cada 3 segundos
-    static const int INTERVALO_ENEMIGOS_MS    = 5000; // Cada 5 segundos
+    static const int INTERVALO_JUEGO_MS      = 16;
+    static const int INTERVALO_OBSTACULOS_MS = 3000;
+    static const int INTERVALO_ENEMIGOS_MS   = 5000;
 
     void cargarCarretera();
     void cargarJugador();
-    void cargarEnemigos();
 
     void procesarMovimiento();
     void liminarJugadorEnCarretera();
@@ -77,7 +70,6 @@ private:
     void verificarColisiones();
     void verificarMeta();
     void mostrarMeta();
-    void establecerSpriteNivel2(const QString &ruta, QRect frameRect);
 };
 
 #endif // NIVEL2_H

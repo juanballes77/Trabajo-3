@@ -11,17 +11,14 @@ Jugador::Jugador(QObject *parent)
     fuerzaImpulso(-8.0f),
     gravedad(0.2f),
     velocidadMaxCaida(3.0f),
-    estaVivo(true),
+    limiteYMaximo(0.0f),
     gravedadActiva(true),
-    frameAlternoRect(QRect()),
     usarSpriteAlternado(false),
+    frameAlternoRect(QRect()),
     frameActual(0),
     moviendose(false),
-    mirandoDerecha(true),
-    limiteYMinimo(0.0f),
-    limiteYMaximo(0.0f)
+    mirandoDerecha(true)
 {
-    // Coordenadas frames nivel 1
     frames.append(QRect(6,   4,  167, 71));
     frames.append(QRect(178, 9,  161, 63));
     frames.append(QRect(30,  88, 143, 71));
@@ -35,8 +32,6 @@ Jugador::Jugador(QObject *parent)
 
     cargarFrame(0);
 }
-
-// ─── Movimiento ───────────────────────────────────────────────
 
 void Jugador::moverIzquierda()
 {
@@ -72,8 +67,6 @@ void Jugador::establecerSpriteNivel2(const QString &ruta, QRect frameRect)
     cargarFrame(0);
 }
 
-// ─── Física ───────────────────────────────────────────────────
-
 void Jugador::aplicarGravedad()
 {
     if (!gravedadActiva) return;
@@ -87,10 +80,9 @@ void Jugador::actualizar()
 {
     aplicarGravedad();
 
-    bool seEstaMoivendo = (velocidadX != 0.0f); // ← guardar antes de modificar
+    bool seEstaMoviendo = (velocidadX != 0.0f);
 
     x += velocidadX;
-
     if (x < 0) {
         x = 0;
         velocidadX = 0.0f;
@@ -100,8 +92,8 @@ void Jugador::actualizar()
         y += velocidadY;
 
     if (limiteYMaximo > 0) {
-        if (y < limiteYMinimo) {
-            y = limiteYMinimo;
+        if (y < 0) {
+            y = 0;
             velocidadY = 0.0f;
         }
         if (y + pixmap().height() > limiteYMaximo) {
@@ -112,7 +104,7 @@ void Jugador::actualizar()
 
     setPos(x, y);
 
-    if (!seEstaMoivendo) {
+    if (!seEstaMoviendo) {
         moviendose = false;
         if (!usarSpriteAlternado)
             cargarFrame(0);
@@ -121,16 +113,12 @@ void Jugador::actualizar()
     velocidadX = 0.0f;
 }
 
-// ─── Animación ────────────────────────────────────────────────
-
 void Jugador::siguienteFrame()
 {
     if (usarSpriteAlternado) {
-        // Nivel 2: siempre anima independiente de teclas
         frameActual = (frameActual + 1) % 2;
         cargarFrame(frameActual);
     } else if (moviendose) {
-        // Nivel 1: solo anima al moverse
         frameActual = (frameActual + 1) % frames.size();
         cargarFrame(frameActual);
     }
@@ -140,31 +128,22 @@ void Jugador::cargarFrame(int indice)
 {
     if (usarSpriteAlternado && !hojaAlterna.isNull()) {
         QPixmap frame = hojaAlterna.copy(frameAlternoRect);
-
-        // Alternar reflejo horizontal para simular pedaleo
         if (indice % 2 == 1)
             frame = frame.transformed(QTransform().scale(-1, 1));
-
-        // Escalar al mismo tamaño que los rivales (50x80)
         frame = frame.scaled(50, 80, Qt::IgnoreAspectRatio);
         setPixmap(frame);
         return;
     }
 
-    // Animación original nivel 1
     if (hoja.isNull() || indice >= frames.size()) return;
     QPixmap frame = hoja.copy(frames[indice]);
     if (mirandoDerecha)
         frame = frame.transformed(QTransform().scale(-1, 1));
     setPixmap(frame);
 }
-// ─── Getters ──────────────────────────────────────────────────
 
 float Jugador::obtenerX() const { return x; }
 float Jugador::obtenerY() const { return y; }
-bool  Jugador::obtenerEstaVivo() const { return estaVivo; }
-
-// ─── Setters ──────────────────────────────────────────────────
 
 void Jugador::establecerPosicion(float x, float y)
 {
@@ -173,21 +152,15 @@ void Jugador::establecerPosicion(float x, float y)
     setPos(this->x, this->y);
 }
 
-void Jugador::establecerEstaVivo(bool estado)
-{
-    estaVivo = estado;
-}
-
 void Jugador::establecerGravedad(bool activa)
 {
-    gravedadActiva     = activa;
-    usarSpriteAlternado = false; // resetear al cambiar de nivel
+    gravedadActiva      = activa;
+    usarSpriteAlternado = false;
     if (!activa)
         velocidadY = 0.0f;
 }
 
-void Jugador::establecerLimites(float yMinimo, float yMaximo)
+void Jugador::establecerLimites(float yMaximo)
 {
-    limiteYMinimo = yMinimo;
     limiteYMaximo = yMaximo;
 }

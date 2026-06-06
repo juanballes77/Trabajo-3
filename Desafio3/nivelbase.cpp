@@ -6,15 +6,12 @@ NivelBase::NivelBase(QGraphicsScene *escena, QObject *parent)
     : QObject(parent),
     escena(escena),
     jugador(nullptr),
-    fondo(nullptr),
     temporizadorParallax(nullptr),
     frameParallaxActual(0),
     fondoCarretera1(nullptr),
     fondoCarretera2(nullptr),
     fondoCarretera3(nullptr),
     fondoCarretera4(nullptr),
-    puntaje(0),
-    vidasRestantes(3),
     nivelCompletado(false),
     estaPausado(false)
 {}
@@ -22,31 +19,12 @@ NivelBase::NivelBase(QGraphicsScene *escena, QObject *parent)
 NivelBase::~NivelBase()
 {
     delete jugador;
-    delete fondo;
-}
-
-// ─── Fondo animado (original) ─────────────────────────────────
-
-void NivelBase::cargarFondo(const QString &rutaImagen)
-{
-    fondo = new Fondo(rutaImagen);
-    escena->addItem(fondo);
-    fondo->setPos(0, 0);
-    fondo->setZValue(-1);
-
-    QRectF rect    = escena->sceneRect();
-    double escalaX = rect.width()  / fondo->pixmap().width();
-    double escalaY = rect.height() / fondo->pixmap().height();
-    fondo->setTransform(QTransform::fromScale(escalaX, escalaY));
-
-    fondo->iniciar();
 }
 
 // ─── Fondo parallax horizontal (nivel 1) ─────────────────────
 
 void NivelBase::cargarFondoParallax(const QString &rutaImagen)
 {
-    // Eliminar timer anterior si existe
     if (temporizadorParallax) {
         temporizadorParallax->stop();
         temporizadorParallax->disconnect();
@@ -102,10 +80,9 @@ void NivelBase::actualizarFrameParallax()
     int nuevoAncho = imagen.width() * escala;
     imagen = imagen.scaled(nuevoAncho, rect.height(), Qt::IgnoreAspectRatio);
 
-    for (QGraphicsPixmapItem *copia : copiasParallax) {
+    for (QGraphicsPixmapItem *copia : copiasParallax)
         if (copia && copia->scene())
             copia->setPixmap(imagen);
-    }
 }
 
 // ─── Fondo carretera vertical (nivel 2) ──────────────────────
@@ -166,40 +143,10 @@ void NivelBase::desplazarFondoCarretera(float velocidad)
 
 // ─── Métodos comunes ──────────────────────────────────────────
 
-void NivelBase::actualizarHUD()
-{
-    // Se implementará cuando tengamos el HUD
-}
-
 void NivelBase::verificarEstado()
 {
-    if (!jugador)
-        return;
-
-    if (!jugador->obtenerEstaVivo()) {
-        perderVida();
-        if (vidasRestantes <= 0)
-            emit juegoTerminado();
-        else
-            iniciar();
-    }
-
     if (nivelCompletado)
         emit nivelTerminado();
 }
 
-void NivelBase::agregarPuntaje(int cantidad)
-{
-    puntaje += cantidad;
-    actualizarHUD();
-}
-
-void NivelBase::perderVida()
-{
-    vidasRestantes--;
-    actualizarHUD();
-}
-
-int  NivelBase::obtenerPuntaje()         const { return puntaje; }
-int  NivelBase::obtenerVidasRestantes()  const { return vidasRestantes; }
 bool NivelBase::obtenerNivelCompletado() const { return nivelCompletado; }

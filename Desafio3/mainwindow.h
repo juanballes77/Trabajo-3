@@ -41,9 +41,8 @@ private:
     Nivel2             *nivel2;
     PantallaTransicion *pantallaTransicion;
 
-    // Cronómetro global
     QElapsedTimer cronometro;
-    qint64        tiempoAcumulado; // ms acumulados antes de pausar
+    qint64        tiempoAcumulado;
 
     QString formatearTiempo(qint64 ms);
 

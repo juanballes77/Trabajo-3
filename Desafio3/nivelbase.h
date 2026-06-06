@@ -7,7 +7,6 @@
 #include <QTimer>
 #include <QVector>
 #include "jugador.h"
-#include "fondo.h"
 
 class NivelBase : public QObject
 {
@@ -22,25 +21,18 @@ public:
     virtual void reanudar()  = 0;
     virtual void terminar()  = 0;
 
-    void actualizarHUD();
     void verificarEstado();
-
-    int  obtenerPuntaje()         const;
-    int  obtenerVidasRestantes()  const;
     bool obtenerNivelCompletado() const;
 
 protected:
-    QGraphicsScene      *escena;
-    Jugador             *jugador;
-
-    // Fondo animado (original)
-    Fondo               *fondo;
+    QGraphicsScene *escena;
+    Jugador        *jugador;
 
     // Fondo parallax (nivel 1)
     QVector<QGraphicsPixmapItem*> copiasParallax;
-    QTimer              *temporizadorParallax;
-    int                  frameParallaxActual;
-    QPixmap              hojaParallax;
+    QTimer  *temporizadorParallax;
+    int      frameParallaxActual;
+    QPixmap  hojaParallax;
 
     // Fondo carretera (nivel 2)
     QGraphicsPixmapItem *fondoCarretera1;
@@ -48,15 +40,9 @@ protected:
     QGraphicsPixmapItem *fondoCarretera3;
     QGraphicsPixmapItem *fondoCarretera4;
 
-    int  puntaje;
-    int  vidasRestantes;
     bool nivelCompletado;
     bool estaPausado;
 
-    void agregarPuntaje(int cantidad);
-    void perderVida();
-
-    void cargarFondo(const QString &rutaImagen);
     void cargarFondoParallax(const QString &rutaImagen);
     void desplazarFondoParallax(float xJugador);
     void cargarFondoCarretera(const QString &rutaImagen);

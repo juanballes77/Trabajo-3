@@ -5,8 +5,7 @@ Calamar::Calamar(float x, float y, QObject *parent)
     xObjetivo(x),
     yObjetivo(y),
     factorLerpX(0.021f),
-    factorLerpY(0.019f),   // Movimiento suave con retraso
-    fuerzaEmpuje(80.0f)  // Píxeles que empuja hacia atrás
+    factorLerpY(0.019f)   // Movimiento suave con retraso
 {
     hoja = QPixmap(":/calamar.png");
 

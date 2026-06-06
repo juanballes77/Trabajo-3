@@ -79,8 +79,7 @@ void Nivel1::terminar()
 
 void Nivel1::actualizar()
 {
-    if (!jugador)
-        return;
+    if (!jugador) return;
 
     procesarMovimiento();
     jugador->actualizar();
@@ -95,11 +94,9 @@ void Nivel1::actualizar()
     }
 
     desplazarFondoParallax(jugador->obtenerX());
-
     verificarColisiones();
     verificarMeta();
     verificarEstado();
-    actualizarHUD();
 }
 
 void Nivel1::teclaPresionada(QKeyEvent *evento)
@@ -149,7 +146,7 @@ void Nivel1::cargarJugador()
     jugador = new Jugador();
     escena->addItem(jugador);
     jugador->establecerPosicion(100, 300);
-    jugador->establecerLimites(0, altoEscena);
+    jugador->establecerLimites(altoEscena);
     jugador->setZValue(1);
 }
 
@@ -275,6 +272,7 @@ void Nivel1::verificarColisiones()
         if (dynamic_cast<Tiburon*>(item) || dynamic_cast<Cangrejo*>(item))
             colisionEnemigo = true;
 
+        // Calamar → solo empuja hacia atrás
         if (dynamic_cast<Calamar*>(item)) {
             float nx = jugador->obtenerX() - 80.0f;
             if (nx < 0) nx = 0;
@@ -290,8 +288,7 @@ void Nivel1::verificarColisiones()
 
 void Nivel1::verificarMeta()
 {
-    if (!metaNivel || !jugador)
-        return;
+    if (!metaNivel || !jugador) return;
 
     if (jugador->collidesWithItem(metaNivel)) {
         nivelCompletado = true;

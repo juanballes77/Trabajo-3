@@ -34,17 +34,14 @@ private slots:
 private:
     QTimer *temporizadorJuego;
 
-    // Teclas
     bool teclaIzquierda;
     bool teclaDerecha;
     bool teclaImpulso;
 
-    // Velocidad del jugador
     float velocidadJugador;
     static constexpr float VELOCIDAD_NORMAL   = 4.0f;
-    static constexpr float VELOCIDAD_REDUCIDA = 1.6f;
+    static constexpr float VELOCIDAD_REDUCIDA = 0.8f;
 
-    // Elementos del nivel
     QVector<Obstaculo*> obstaculos;
     QVector<Tiburon*>   tiburones;
     QVector<Cangrejo*>  cangrejos;
@@ -64,7 +61,6 @@ private:
     void actualizarEnemigos();
     void verificarColisiones();
     void verificarMeta();
-
 };
 
 #endif // NIVEL1_H

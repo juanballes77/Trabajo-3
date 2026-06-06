@@ -10,9 +10,8 @@ Enemigo::Enemigo(float x, float y, float limiteIzq, float limiteDer,
     limiteIzquierdo(limiteIzq),
     limiteDerecho(limiteDer),
     direccion(1.0f),
-    estaVivo(true),
-    frameActual(0),
-    mirandoDerecha(true)
+    mirandoDerecha(true),
+    frameActual(0)
 {
     temporizadorAnimacion = new QTimer(this);
     connect(temporizadorAnimacion, &QTimer::timeout, this, &Enemigo::onSiguienteFrame);
@@ -24,18 +23,15 @@ Enemigo::~Enemigo()
     temporizadorAnimacion->stop();
 }
 
-// ─── Patrulla de lado a lado ──────────────────────────────────
-
 void Enemigo::patrullar()
 {
     x += velocidad * direccion;
 
-    // Rebotar en los límites
     if (x >= limiteDerecho) {
-        direccion    = -1.0f;
+        direccion      = -1.0f;
         mirandoDerecha = false;
     } else if (x <= limiteIzquierdo) {
-        direccion    = 1.0f;
+        direccion      = 1.0f;
         mirandoDerecha = true;
     }
 
@@ -50,9 +46,5 @@ void Enemigo::onSiguienteFrame()
     }
 }
 
-// ─── Getters / Setters ────────────────────────────────────────
-
 float Enemigo::obtenerX() const { return x; }
 float Enemigo::obtenerY() const { return y; }
-bool  Enemigo::obtenerEstaVivo() const { return estaVivo; }
-void  Enemigo::establecerEstaVivo(bool estado) { estaVivo = estado; }

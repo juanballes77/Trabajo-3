@@ -19,8 +19,6 @@ protected:
 private:
     float xObjetivo;
     float yObjetivo;
-    float factorLerp;      // Suavidad de persecución (0.0 lento - 1.0 directo)
-    float fuerzaEmpuje;
     float factorLerpX;
     float factorLerpY;
 };
