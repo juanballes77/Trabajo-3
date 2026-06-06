@@ -6,6 +6,7 @@
 #include <QStackedWidget>
 #include <QGraphicsScene>
 #include <QGraphicsView>
+#include <QElapsedTimer>
 #include "nivel1.h"
 #include "nivel2.h"
 #include "pantallatransicion.h"
@@ -39,6 +40,12 @@ private:
     Nivel1             *nivel1;
     Nivel2             *nivel2;
     PantallaTransicion *pantallaTransicion;
+
+    // Cronómetro global
+    QElapsedTimer cronometro;
+    qint64        tiempoAcumulado; // ms acumulados antes de pausar
+
+    QString formatearTiempo(qint64 ms);
 
     static const int IDX_MENU       = 0;
     static const int IDX_JUEGO      = 1;

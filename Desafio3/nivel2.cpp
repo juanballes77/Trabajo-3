@@ -21,7 +21,7 @@ Nivel2::Nivel2(QGraphicsScene *escena, QObject *parent)
     aceleracion(0.7f),
     desaceleracion(0.1f),
     repeticionesFondo(0),
-    repeticionesParaMeta(10),
+    repeticionesParaMeta(20),
     metaVisible(false),
     metaNivel2(nullptr)
 {
@@ -178,7 +178,7 @@ void Nivel2::liminarJugadorEnCarretera()
 
 void Nivel2::generarObstaculo()
 {
-    int cantidad = 1 + (std::rand() % 6);
+    int cantidad = 1 + (std::rand() % 9);
 
     for (int i = 0; i < cantidad; i++) {
         float rangoX = carreteraDerecha - carreteraIzquierda - 60;
@@ -194,7 +194,7 @@ void Nivel2::generarObstaculo()
 
 void Nivel2::generarEnemigo()
 {
-    int cantidad = 1 + (std::rand() % 4);
+    int cantidad = 1 + (std::rand() % 5);
 
     for (int i = 0; i < cantidad; i++) {
         float rangoX = carreteraDerecha - carreteraIzquierda - 50;

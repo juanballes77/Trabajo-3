@@ -1,5 +1,6 @@
 C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/EWIEGA46WW/moc_mainwindow.cpp: C:/Users/juand/OneDrive/Documentos/Desafio3/mainwindow.h \
   C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit-Debug/Desafio3_autogen/moc_predefs.h \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/QElapsedTimer \
   C:/Qt/6.10.2/mingw_64/include/QtCore/QList \
   C:/Qt/6.10.2/mingw_64/include/QtCore/QObject \
   C:/Qt/6.10.2/mingw_64/include/QtCore/QRect \
@@ -51,6 +52,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/qdatastream.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qdeadlinetimer.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qdebug.h \
+  C:/Qt/6.10.2/mingw_64/include/QtCore/qelapsedtimer.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qendian.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qeventloop.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qexceptionhandling.h \
@@ -148,6 +150,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtCore/qxptype_traits.h \
   C:/Qt/6.10.2/mingw_64/include/QtCore/qyieldcpu.h \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QKeyEvent \
+  C:/Qt/6.10.2/mingw_64/include/QtGui/QPaintEvent \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QPainter \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QPixmap \
   C:/Qt/6.10.2/mingw_64/include/QtGui/QTransform \
@@ -198,6 +201,7 @@ C:/Users/juand/OneDrive/Documentos/Desafio3/build/Desktop_Qt_6_10_2_MinGW_64_bit
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsRectItem \
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsScene \
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QGraphicsView \
+  C:/Qt/6.10.2/mingw_64/include/QtWidgets/QHBoxLayout \
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QLabel \
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QMainWindow \
   C:/Qt/6.10.2/mingw_64/include/QtWidgets/QPushButton \

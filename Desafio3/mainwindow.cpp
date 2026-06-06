@@ -5,6 +5,7 @@
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
+    , tiempoAcumulado(0)
 {
     ui->setupUi(this);
 
@@ -24,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     pantallaTransicion = new PantallaTransicion(this);
     pantallaTransicion->establecerTexto(
         "¡ETAPA 1 COMPLETADA!",
-        "Has terminado la etapa de natación.\n¡Prepárate para el ciclismo!"
+        "Has terminado la etapa de natación.\n\nAhora pasas a tierra firme. Esquiva a los demás\nciclistas y obstáculos para llegar en primer lugar."
         );
 
     stackedWidget->addWidget(menu);               // índice 0 → menú
@@ -40,10 +41,14 @@ MainWindow::MainWindow(QWidget *parent)
         stackedWidget->setCurrentIndex(IDX_JUEGO);
 
         QRectF rect = vistaJuego->rect();
-        escena->setSceneRect(0, 0, 10000, rect.height()); // ← escena horizontal nivel 1
+        escena->setSceneRect(0, 0, 10000, rect.height());
         vistaJuego->resetTransform();
 
-        nivel1->iniciar(); // ← nivel1
+        // Iniciar cronómetro
+        tiempoAcumulado = 0;
+        cronometro.restart();
+
+        nivel1->iniciar();
     });
 
     connect(nivel1, &Nivel1::nivelTerminado, this, &MainWindow::onNivel1Terminado);
@@ -56,14 +61,19 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+// ─── Slots ────────────────────────────────────────────────────
+
 void MainWindow::onNivel1Terminado()
 {
-    // Terminar nivel 1 limpiando parallax antes de mostrar transición
+    // Pausar cronómetro
+    tiempoAcumulado += cronometro.elapsed();
+
     nivel1->terminar();
 
+    pantallaTransicion->establecerModoFinal(false);
     pantallaTransicion->establecerTexto(
         "¡ETAPA 1 COMPLETADA!",
-        "Has terminado la etapa de natación.\n¡Prepárate para el ciclismo!"
+        "Has terminado la etapa de natación.\n\nAhora pasas a tierra firme. Esquiva a los demás\nciclistas y obstáculos para llegar en primer lugar."
         );
     stackedWidget->setCurrentIndex(IDX_TRANSICION);
 }
@@ -81,17 +91,52 @@ void MainWindow::onContinuarTransicion()
     vistaJuego->fitInView(escena->sceneRect(), Qt::IgnoreAspectRatio);
 
     stackedWidget->setCurrentIndex(IDX_JUEGO);
+
+    // Reanudar cronómetro
+    cronometro.restart();
+
     nivel2->iniciar();
 }
 
 void MainWindow::onNivel2Terminado()
 {
+    tiempoAcumulado += cronometro.elapsed();
+    QString tiempoTotal = formatearTiempo(tiempoAcumulado);
+
+    // Determinar puesto según tiempo
+    QString puesto;
+    if (tiempoAcumulado < 142000)      // menos de 2:22:00
+        puesto = "¡primer lugar! 🥇";
+    else if (tiempoAcumulado < 156000) // menos de 2:36:00
+        puesto = "¡segundo lugar! 🥈";
+    else if (tiempoAcumulado < 165000) // menos de 2:45:00
+        puesto = "¡tercer lugar! 🥉";
+    else
+        puesto = "fuera del podio";
+
+    pantallaTransicion->establecerModoFinal(true);
+    pantallaTransicion->establecerTiemposPodio("02:22:00", "02:36:00", "02:45:00");
     pantallaTransicion->establecerTexto(
         "¡TRIATLÓN COMPLETADO!",
-        "¡Felicitaciones!\nHas completado las etapas de\nnatación y ciclismo."
+        QString("¡Felicitaciones! Has quedado en %1\n\nTiempo total: %2").arg(puesto).arg(tiempoTotal)
         );
     stackedWidget->setCurrentIndex(IDX_TRANSICION);
 }
+
+QString MainWindow::formatearTiempo(qint64 ms)
+{
+    qint64 segundos     = ms / 1000;
+    qint64 minutos      = segundos / 60;
+    segundos            = segundos % 60;
+    qint64 milisegundos = (ms % 1000) / 10;
+
+    return QString("%1:%2:%3")
+        .arg(minutos,      2, 10, QChar('0'))
+        .arg(segundos,     2, 10, QChar('0'))
+        .arg(milisegundos, 2, 10, QChar('0'));
+}
+
+// ─── Teclado ──────────────────────────────────────────────────
 
 void MainWindow::keyPressEvent(QKeyEvent *evento)
 {
